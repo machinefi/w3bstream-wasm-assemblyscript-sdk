@@ -1,3 +1,3 @@
-import { Log, SetDB, GetDB, GetDataByRID, SendTx } from "./sdk";
+import * as sdk from "./sdk";
 
-export { Log, SetDB, GetDB, GetDataByRID, SendTx };
+export { sdk };

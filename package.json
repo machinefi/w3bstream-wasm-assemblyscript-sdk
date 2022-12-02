@@ -1,8 +1,9 @@
 {
-    "name": "tstest",
-    "version": "1.0.0",
+    "name": "w3bstream-assemblyscript-sdk",
+    "version": "0.1.0",
     "description": "",
     "main": "index.js",
+    "repository": "/machinefi/w3bstream-wasm-ts-sdk",
     "scripts": {
         "test": "node tests",
         "asbuild:debug": "asc assembly/index.ts --target debug",

@@ -42,12 +42,12 @@ function abort(
 
 ```typescript
 
-import { GetDataByRID, Log } from "./sdk";
+import { sdk } from "./sdk";
 
 export function start(rid: i32): i32 {
-  Log("Start from assemblyscript");
+  sdk.Log("Start from assemblyscript");
   const message = GetDataByRID(rid);
-  Log("wasm received message:" + message);
+  sdk.Log("wasm received message:" + message);
   return 0;
 }
 ```
@@ -55,12 +55,12 @@ export function start(rid: i32): i32 {
 ### SendTx
 > SendTx(tx: string)
 ```typescript
-import { GetDataByRID, GetDB, Log, SendTx, SetDB } from "./sdk";
+import { sdk } from "./sdk";
 
 export function start(rid: i32): i32 {
   const ERC20Addr = `0xb73eE6EB5b1984c78CCcC49eA7Ad773E71d74F51`;
   const account = `9117f5EF4156709092f79740a97b1638cA399A00`;
-  SendTx(`
+  sdk.SendTx(`
   {
       "to": "${ERC20Addr}",
       "value": "0",
@@ -75,12 +75,12 @@ export function start(rid: i32): i32 {
 
 > GetDB(key: string)
 ```typescript
-import { GetDB, Log, SetDB } from "./sdk";
+import { sdk } from "./sdk";
 
 export function start(rid: i32): i32 {
-  SetDB("wordCount", word.length);
-  let value = GetDB("wordCount");
-  Log("wasm get value:" + value.toString());
+  sdk.SetDB("wordCount", word.length);
+  let value = sdk.GetDB("wordCount");
+  sdk.Log("wasm get value:" + value.toString());
   return 0;
 }
 ```
