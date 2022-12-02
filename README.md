@@ -42,7 +42,7 @@ function abort(
 
 ```typescript
 
-import { sdk } from "./sdk";
+import { sdk } from "w3bstream-assemblyscript-sdk";
 
 export function start(rid: i32): i32 {
   sdk.Log("Start from assemblyscript");
@@ -55,7 +55,7 @@ export function start(rid: i32): i32 {
 ### SendTx
 > SendTx(tx: string)
 ```typescript
-import { sdk } from "./sdk";
+import { sdk } from "w3bstream-assemblyscript-sdk";
 
 export function start(rid: i32): i32 {
   const ERC20Addr = `0xb73eE6EB5b1984c78CCcC49eA7Ad773E71d74F51`;
@@ -75,7 +75,7 @@ export function start(rid: i32): i32 {
 
 > GetDB(key: string)
 ```typescript
-import { sdk } from "./sdk";
+import { sdk } from "w3bstream-assemblyscript-sdk";
 
 export function start(rid: i32): i32 {
   sdk.SetDB("wordCount", word.length);
