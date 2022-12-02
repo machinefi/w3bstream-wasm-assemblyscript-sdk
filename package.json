@@ -1,6 +1,6 @@
 {
     "name": "w3bstream-assemblyscript-sdk",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "",
     "main": "index.js",
     "repository": "/machinefi/w3bstream-wasm-ts-sdk",
