@@ -16,6 +16,13 @@ declare function ws_set_data(rid: i32, ptr: usize , size:u32): i32
 @external("env", "ws_send_tx")
 declare function ws_send_tx(ptr: usize , size:u32): i32
 
+@external("env", "ws_set_sql_db")
+declare function ws_set_sql_db(ptr: usize , size:u32): i32
+
+@external("env", "ws_get_sql_db")
+declare function ws_get_sql_db(ptr: usize , size:u32, rAddr:u32, rSize:usize): i32
+
+
 export function Log(message: string):i32 {
     let strEncoded = String.UTF8.encode(message, true);
     let message_ptr = changetype<usize>(strEncoded);
@@ -23,6 +30,37 @@ export function Log(message: string):i32 {
     ws_log(3, message_ptr, message_size); // logInfoLevel = 3
     return 0;
 };
+
+export function SetSQLDB(execSQL: string):i32 {
+    let keyEncoded = String.UTF8.encode(execSQL, true);
+    let key_ptr = changetype<usize>(keyEncoded);
+    let key_size = keyEncoded.byteLength - 1;
+    ws_set_sql_db(key_ptr, key_size);
+    return 0;
+}
+
+
+export function GetSQLDB(querySQL: string):string {
+    //key to ptr
+    let keyEncoded = String.UTF8.encode(querySQL, true);
+    let ptr = changetype<usize>(keyEncoded);
+    let size = keyEncoded.byteLength - 1;
+
+    let rAddr = heap.alloc(sizeof<u32>());
+    let rSize = heap.alloc(sizeof<u32>());
+
+    let code = ws_get_sql_db(ptr, size, rAddr, rSize);
+    if(code != 0){
+        return "";
+    }
+    let rAddrValue = load<u32>(rAddr);
+    let rAddrSize = load<u32>(rSize);
+    let data = String.UTF8.decodeUnsafe(rAddrValue, rAddrSize, true);
+    heap.free(rAddr);
+    heap.free(rSize);
+    return data;
+}
+
 
 export function SetDB(key: string, value: i32):i32 {
     let keyEncoded = String.UTF8.encode(key, true);
