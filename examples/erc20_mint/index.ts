@@ -8,12 +8,15 @@ export function start(rid: i32): i32 {
   Log("wasm received message:" + message);
 
   let jsonObj: JSON.Obj = JSON.parse(message) as JSON.Obj;
+  // payload like {
+  //   "chainId": 4690,
+  //   "address":"0x4BF7916893DfA78834B2F8B535654682d36e1163",
+  //   "mintTo":"0x9117f5EF4156709092f79740a97b1638cA399A00"
+  // }
 
   let chainIdOrNull: JSON.Integer | null = jsonObj.getInteger("chainId");
   let ERC20Address: JSON.Str | null = jsonObj.getString("address");
-  let MintTo: JSON.Str | null = jsonObj.getString("mintTo");// without 
-  // const ERC20Addr = `0x4BF7916893DfA78834B2F8B535654682d36e1163`;
-  // const account = `9117f5EF4156709092f79740a97b1638cA399A00`;
+  let MintTo: JSON.Str | null = jsonObj.getString("mintTo");
   if (chainIdOrNull && ERC20Address && MintTo) {
     const res = SendTx(4690, `
     {
