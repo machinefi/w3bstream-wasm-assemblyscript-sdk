@@ -1,0 +1,12 @@
+{
+    "extends": "../node_modules/assemblyscript/std/assembly.json",
+    "include": [
+        "./**/*.ts",
+        "../examples/**/*.ts"
+    ],
+    "compilerOptions": {
+        "target": "esnext",
+        "skipLibCheck": true,
+        "experimentalDecorators": true
+    },
+}

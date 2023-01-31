@@ -1,3 +1,2 @@
-import * as sdk from "./sdk";
-
-export { sdk };
+export *  from "./sdk";
+export * from "./memory";

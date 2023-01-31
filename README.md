@@ -8,41 +8,12 @@ This is the official assemblyscript sdk for w3bstream.
 npm install w3bstream-assemblyscript-sdk
 ```
 
-## Usage
-
-> Frist you need to export alloc and abort from your `applet.ts` to the global scope
-
-### Export alloc for w3bstream vm and export abort for assemblyScript special use
-
-`applet.ts`
-```typescript
-/**Export start function for w3bstream */
-export function start(rid: i32): i32 {
-    /*Your main code here.*/
-}
-
-/**Export alloc for w3bstream vm */
-export function alloc(size: usize): usize {
-  return heap.alloc(size);
-}
-
-/** Export abort for assemblyScript special use
- * @doc: https://www.assemblyscript.org/concepts.html#special-imports
- */
-function abort(
-  message: string | null,
-  fileName: string | null,
-  lineNumber: u32,
-  columnNumber: u32
-): void {}
-```
-### Log 
+### Log
 
 > Log(message: string)
 
 ```typescript
-
-import { sdk } from "w3bstream-assemblyscript-sdk";
+import { Log } from "w3bstream-assemblyscript-sdk";
 
 export function start(rid: i32): i32 {
   sdk.Log("Start from assemblyscript");
@@ -53,14 +24,16 @@ export function start(rid: i32): i32 {
 ```
 
 ### SendTx
+
 > SendTx(tx: string)
+
 ```typescript
-import { sdk } from "w3bstream-assemblyscript-sdk";
+import { SendTx } from "w3bstream-assemblyscript-sdk";
 
 export function start(rid: i32): i32 {
   const ERC20Addr = `0xb73eE6EB5b1984c78CCcC49eA7Ad773E71d74F51`;
   const account = `9117f5EF4156709092f79740a97b1638cA399A00`;
-  sdk.SendTx(`
+  SendTx(`
   {
       "to": "${ERC20Addr}",
       "value": "0",
@@ -71,19 +44,84 @@ export function start(rid: i32): i32 {
 ```
 
 ### GetDB & SetDB
+
 > SetDB(key: string, value: i32)
 
 > GetDB(key: string)
+
 ```typescript
-import { sdk } from "w3bstream-assemblyscript-sdk";
+import { SetDB, Log, GetDB } from "w3bstream-assemblyscript-sdk";
 
 export function start(rid: i32): i32 {
-  sdk.SetDB("wordCount", word.length);
-  let value = sdk.GetDB("wordCount");
-  sdk.Log("wasm get value:" + value.toString());
+  SetDB("wordCount", word.length);
+  let value = GetDB("wordCount");
+  Log("wasm get value:" + value.toString());
+  return 0;
+}
+```
+
+### ExecSQL & QuerySQL
+
+#### First, you need to create a project with database schema for wasm db storage
+
+[Create Database Schema](https://github.com/machinefi/w3bstream/blob/main/HOWTO.md#create-project-with-database-schema-for-wasm-db-storage)
+
+```typescript
+curl --location --request GET 'http://localhost:8888/srv-applet-mgr/v0/project_config/project_01/PROJECT_SCHEMA' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJQYXlsb2FkIjoiOTAxNjYzODYzNTI5Njc3NSIsImlzcyI6InczYnN0cmVhbSIsImV4cCI6MTY3NTE0MzA0Nn0.okRRanlER4OwZTSS60m4qdg5F4qjVWDcPys-eAJ5KkE' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "tables": [
+    {
+      "name": "f_table",
+      "desc": "test table",
+      "cols": [
+        {
+          "name": "f_gender",
+          "constrains": {
+            "datatype": "UINT8",
+            "length": 255,
+            "default": "0",
+            "desc": "user name"
+          }
+        }
+      ],
+      "keys": [
+        {
+          "name": "ui_gender",
+          "isUnique": true,
+          "columnNames": [
+            "f_gender"
+          ]
+        }
+      ],
+      "withSoftDeletion": true,
+      "withPrimaryKey": true
+    }
+  ]
+}'
+```
+
+```typescript
+export function start(rid: i32): i32 {
+  Log("start from typescript");
+  const key = GetDataByRID(rid);
+  const v = new Map<string, i32>();
+  v.set("int32", 1);
+  const value = ExecSQL(`INSERT INTO "f_table" (f_id,f_gender) VALUES (?,?);`, [
+    v,
+    v,
+  ]);
   return 0;
 }
 ```
 
 ## More examples
-https://github.com/machinefi/w3bstream_compilets_demo
+
+[JSON Example](./examples/json/index.ts)
+
+## Build
+
+```bash
+npm run asbuild:<example>
+```
