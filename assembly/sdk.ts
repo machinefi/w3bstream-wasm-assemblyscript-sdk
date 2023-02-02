@@ -185,8 +185,6 @@ export function SendTx(chainId: i32, tx: string): string {
 
   let vm = String.UTF8.decodeUnsafe(vmAddr, vmSize, true);
 
-  Log(`vm: ${vm}`);
-
   heap.free(vmAddrPtr);
   heap.free(vmSizePtr);
 

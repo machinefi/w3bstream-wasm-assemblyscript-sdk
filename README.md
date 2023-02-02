@@ -25,7 +25,7 @@ export function start(rid: i32): i32 {
 
 ### SendTx
 
-> SendTx(tx: string)
+> SendTx(chainId:i32, tx: string) : string
 
 ```typescript
 import { SendTx } from "w3bstream-assemblyscript-sdk";
@@ -33,12 +33,16 @@ import { SendTx } from "w3bstream-assemblyscript-sdk";
 export function start(rid: i32): i32 {
   const ERC20Addr = `0xb73eE6EB5b1984c78CCcC49eA7Ad773E71d74F51`;
   const account = `9117f5EF4156709092f79740a97b1638cA399A00`;
-  SendTx(`
+  const hash = SendTx(
+    4690,
+    `
   {
       "to": "${ERC20Addr}",
       "value": "0",
       "data": "40c10f19000000000000000000000000${account}0000000000000000000000000000000000000000000000000de0b6b3a7640000"
-  }`);
+  }`
+  );
+  Log("wasm send tx:" + hash);
   return 0;
 }
 ```
@@ -112,6 +116,19 @@ export function start(rid: i32): i32 {
     v,
     v,
   ]);
+  return 0;
+}
+```
+
+## GetEnv(key:string)
+
+```typescript
+import { GetEnv } from "w3bstream-assemblyscript-sdk";
+
+export function start(rid: i32): i32 {
+  const key = GetDataByRID(rid);
+  const value = GetEnv(key);
+  Log("wasm get env:" + value);
   return 0;
 }
 ```
