@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/machinefi/w3bstream-wasm-ts-sdk.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "node tests",
     "asbuild:log": "asc examples/log/index.ts --use abort=assembly/memory/abort --target release -o ./build/log.wasm",
