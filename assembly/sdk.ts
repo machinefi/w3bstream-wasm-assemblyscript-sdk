@@ -53,15 +53,12 @@ export function ExecSQL(query: string, args: Map<string, i32>[]): i32 {
   encoder.popObject();
   let serializedQuery = encoder.serialize();
   let string = encoder.toString()
-  Log(`serializedQuery: ${serializedQuery.buffer}`);
-  Log(`${string}`)
   let key_ptr = changetype<usize>(serializedQuery.buffer);
-  Log(`key_ptr: ${key_ptr} key_size: ${serializedQuery.length}`)
   const ret = ws_set_sql_db(key_ptr, serializedQuery.length);
-  Log(`ret: ${ret}`)
   if (ret !== 0) {
     Log("fail to execute the sql query");
   }
+
   return 0;
 }
 
