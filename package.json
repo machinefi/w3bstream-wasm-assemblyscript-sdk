@@ -1,9 +1,8 @@
 {
-  "name": "w3bstream-assemblyscript-sdk",
+  "name": "@w3bstream/wasm-sdk",
   "version": "0.1.2",
   "description": "",
   "main": "index.js",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/machinefi/w3bstream-wasm-ts-sdk.git"
@@ -20,7 +19,7 @@
     "asbuild:sql": "asc examples/sql/index.ts --use abort=assembly/memory/abort --target release -o ./build/sql.wasm",
     "start": "npx serve ."
   },
-  "author": "",
+  "author": "@w3bstream",
   "license": "ISC",
   "dependencies": {
     "assemblyscript": "^0.26.7",
