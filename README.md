@@ -1,11 +1,11 @@
-# w3bstream wasm assemblyscript sdk
+# @w3bstream/wasm-sdk
 
 This is the official assemblyscript sdk for w3bstream.
 
 ## Installation
 
 ```bash
-npm install w3bstream-assemblyscript-sdk
+npm install @w3bstream/wasm-sdk
 ```
 
 ### Log
@@ -13,7 +13,7 @@ npm install w3bstream-assemblyscript-sdk
 > Log(message: string)
 
 ```typescript
-import { Log } from "w3bstream-assemblyscript-sdk";
+import { Log } from "@w3bstream/wasm-sdk";
 
 export function start(rid: i32): i32 {
   sdk.Log("Start from assemblyscript");
@@ -28,7 +28,7 @@ export function start(rid: i32): i32 {
 > SendTx(chainId:i32, tx: string) : string
 
 ```typescript
-import { SendTx } from "w3bstream-assemblyscript-sdk";
+import { SendTx } from "@w3bstream/wasm-sdk";
 
 export function start(rid: i32): i32 {
   const ERC20Addr = `0xb73eE6EB5b1984c78CCcC49eA7Ad773E71d74F51`;
@@ -54,7 +54,7 @@ export function start(rid: i32): i32 {
 > GetDB(key: string)
 
 ```typescript
-import { SetDB, Log, GetDB } from "w3bstream-assemblyscript-sdk";
+import { SetDB, Log, GetDB } from "@w3bstream/wasm-sdk";
 
 export function start(rid: i32): i32 {
   SetDB("wordCount", word.length);
@@ -123,7 +123,7 @@ export function start(rid: i32): i32 {
 ## GetEnv(key:string)
 
 ```typescript
-import { GetEnv } from "w3bstream-assemblyscript-sdk";
+import { GetEnv } from "@w3bstream/wasm-sdk";
 
 export function start(rid: i32): i32 {
   const key = GetDataByRID(rid);
