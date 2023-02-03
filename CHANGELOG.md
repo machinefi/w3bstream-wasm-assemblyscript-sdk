@@ -1,3 +1,10 @@
+## [0.1.5](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.1.4...v0.1.5) (2023-02-03)
+
+
+### Bug Fixes
+
+* **README:** update doc ([26edca9](https://github.com/machinefi/w3bstream-wasm-ts-sdk/commit/26edca9776bd0c8088d6f2dd4c68acc7b4acc9fd))
+
 ## [0.1.4](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.1.3...v0.1.4) (2023-02-03)
 
 
