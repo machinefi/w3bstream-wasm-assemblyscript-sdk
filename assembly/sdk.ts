@@ -40,7 +40,7 @@ export {
 } from "assemblyscript-json/assembly/index";
 
 
-export function ExecSQL(query: string, args: Map<string, i32>[]): i32 {
+export function ExecSQL(query: string, args: SQLTypes[]): i32 {
   // const params = args.map(v => v.getParam());
   // const dbQuery = { Statement: query, Params: args };
   //{ Statement: query, Params: [{Int32:12}] }
@@ -49,15 +49,17 @@ export function ExecSQL(query: string, args: Map<string, i32>[]): i32 {
   encoder.setString("statement", query);
   encoder.pushArray("params");
   for (let i = 0; i < args.length; i++) {
-    const param: Map<string, i32> = args[i];
+    const param: SQLTypes = args[i];
     encoder.pushObject(null)
-    encoder.setInteger("int32", param.get('int32'))
+    param.pushSQLType(encoder);
+    // encoder.setInteger("int32", param.getParmas())
     encoder.popObject()
   }
   encoder.popArray();
   encoder.popObject();
   let serializedQuery = encoder.serialize();
   let string = encoder.toString()
+  Log(string)
   let key_ptr = changetype<usize>(serializedQuery.buffer);
   const ret = ws_set_sql_db(key_ptr, serializedQuery.length);
   if (ret !== 0) {
