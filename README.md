@@ -22,9 +22,9 @@ import { Log } from "@w3bstream/wasm-sdk";
 export { alloc } from "@w3bstream/wasm-sdk";
 
 export function start(rid: i32): i32 {
-  sdk.Log("Start from assemblyscript");
+  Log("Start from assemblyscript");
   const message = GetDataByRID(rid);
-  sdk.Log("wasm received message:" + message);
+  Log("wasm received message:" + message);
   return 0;
 }
 ```
