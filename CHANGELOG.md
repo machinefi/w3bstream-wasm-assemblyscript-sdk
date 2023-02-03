@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.1.9...v0.2.0) (2023-02-03)
+
+
+### Features
+
+* **sql:** update sql type ([488b908](https://github.com/machinefi/w3bstream-wasm-ts-sdk/commit/488b9087d7afe785e2dd1448998fc75335b1115c))
+
 ## [0.1.9](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.1.8...v0.1.9) (2023-02-03)
 
 
