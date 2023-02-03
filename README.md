@@ -145,19 +145,29 @@ export function start(rid: i32): i32 {
 }
 ```
 
-## More examples
-
-[JSON Example](./examples/json/index.ts)
 
 ## Build
 
 > https://www.assemblyscript.org/concepts.html#special-imports
 
+
+The abort method will be exposed inside w3bstream in later versions
+[issues/308](https://github.com/machinefi/w3bstream/issues/308)
+
+```typescript
+export function abort(
+  message: string | null,
+  fileName: string | null,
+  lineNumber: u32,
+  columnNumber: u32
+): void { }
+```
+
 package.json
 
 ```json
 "scripts": {
-    "asbuild:release": "asc assembly/index.ts --use abort=assembly/memory/abort --target release",
+    "asbuild:release": "asc assembly/index.ts --use abort=assembly/index/abort --target release",
   },
 ```
 
@@ -166,3 +176,12 @@ Some language features need support from the host environment to function, yield
 - function env.abort?(message: usize, fileName: usize, line: u32, column: u32): void
 
 The respective implementations of , and can be overridden with, for example, , here redirecting calls to to a custom function in . Useful if an environment does not provide compatible implementations, or when the respective imports are not desired and custom implementations are sufficient.aborttraceseed--use abort=assembly/index/myAbortabortmyAbortassembly/index.ts
+
+
+## Known Issues
+- If the `pnpm` installation package is used, dependencies may not be correctly installed. You can use `npm` or `yarn` to install dependencies
+
+
+## More examples
+
+[JSON Example](./examples/json/index.ts)
