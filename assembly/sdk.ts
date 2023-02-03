@@ -30,10 +30,14 @@ import { dBQuery, SQLTypes } from "./sql";
 @external("env", "ws_get_sql_db")
   declare function ws_get_sql_db(ptr: usize, size: u32, rAddr: u32, rSize: usize): i32
 
+// export {
+//   JSON,
+//   JSONEncoder,
+// } from "../node_modules/assemblyscript-json/assembly/index";
 export {
   JSON,
   JSONEncoder,
-} from "../node_modules/assemblyscript-json/assembly/index";
+} from "assemblyscript-json/assembly/index";
 
 
 export function ExecSQL(query: string, args: Map<string, i32>[]): i32 {
