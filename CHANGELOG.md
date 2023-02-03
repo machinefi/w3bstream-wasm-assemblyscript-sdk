@@ -1,3 +1,10 @@
+## [0.1.7](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.1.6...v0.1.7) (2023-02-03)
+
+
+### Bug Fixes
+
+* **import:** import issuse ([f41e53b](https://github.com/machinefi/w3bstream-wasm-ts-sdk/commit/f41e53be8f687e07869b14ebe07fb4685ae624f7))
+
 ## [0.1.6](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.1.5...v0.1.6) (2023-02-03)
 
 
