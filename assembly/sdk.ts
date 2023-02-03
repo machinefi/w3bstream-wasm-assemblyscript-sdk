@@ -1,31 +1,32 @@
 import { JSON, JSONEncoder } from ".";
 import { dBQuery, SQLTypes } from "./sql";
 
+// @ts-ignore: decorator
 @external("env", "ws_log")
   declare function ws_log(logLevel: u8, ptr: usize, size: usize): i32
-
+// @ts-ignore: decorator
 @external("env", "ws_set_db")
   declare function ws_set_db(key_ptr: usize, ket_size: i32, return_ptr: usize, return_size: i32): i32
-
+// @ts-ignore: decorator
 @external("env", "ws_get_db")
   declare function ws_get_db(addr: usize, size: usize, rAddr: usize, rSize: u32): i32
-
+// @ts-ignore: decorator
 @external("env", "ws_get_data")
   declare function ws_get_data(rid: i32, data_ptr: usize, size_ptr: usize): i32
-
+// @ts-ignore: decorator
 @external("env", "ws_set_data")
   declare function ws_set_data(rid: i32, ptr: usize, size: u32): i32
-
+// @ts-ignore: decorator
 @external("env", "ws_send_tx")
   // declare function ws_send_tx(ptr: usize, size: u32): i32
   declare function ws_send_tx(chainID: i32, offset: usize, size: usize, vmAddrPtr: usize, vmSizePtr: usize): i32
-
+// @ts-ignore: decorator
 @external("env", "ws_get_env")
   declare function ws_get_env(kaddr: usize, ksize: usize, vaddr: usize, vsize: usize): i32
-
+// @ts-ignore: decorator
 @external("env", "ws_set_sql_db")
   declare function ws_set_sql_db(ptr: usize, size: u32): i32
-
+// @ts-ignore: decorator
 @external("env", "ws_get_sql_db")
   declare function ws_get_sql_db(ptr: usize, size: u32, rAddr: u32, rSize: usize): i32
 

@@ -8,12 +8,18 @@ This is the official assemblyscript sdk for w3bstream.
 npm install @w3bstream/wasm-sdk
 ```
 
+## Useage
+
+**Your must export alloc function from @w3bstream/wasm-sdk for w3bstream vm**
+
 ### Log
 
 > Log(message: string)
 
 ```typescript
 import { Log } from "@w3bstream/wasm-sdk";
+//export alloc for w3bstream vm
+export { alloc } from "@w3bstream/wasm-sdk";
 
 export function start(rid: i32): i32 {
   sdk.Log("Start from assemblyscript");
@@ -29,6 +35,7 @@ export function start(rid: i32): i32 {
 
 ```typescript
 import { SendTx } from "@w3bstream/wasm-sdk";
+export { alloc } from "@w3bstream/wasm-sdk";
 
 export function start(rid: i32): i32 {
   const ERC20Addr = `0xb73eE6EB5b1984c78CCcC49eA7Ad773E71d74F51`;
@@ -55,6 +62,7 @@ export function start(rid: i32): i32 {
 
 ```typescript
 import { SetDB, Log, GetDB } from "@w3bstream/wasm-sdk";
+export { alloc } from "@w3bstream/wasm-sdk";
 
 export function start(rid: i32): i32 {
   SetDB("wordCount", word.length);
@@ -107,6 +115,9 @@ curl --location --request GET 'http://localhost:8888/srv-applet-mgr/v0/project_c
 ```
 
 ```typescript
+export { alloc } from "@w3bstream/wasm-sdk";
+import { ExecSQL, QuerySQL, Log } from "@w3bstream/wasm-sdk";
+
 export function start(rid: i32): i32 {
   Log("start from typescript");
   const key = GetDataByRID(rid);
@@ -123,7 +134,8 @@ export function start(rid: i32): i32 {
 ## GetEnv(key:string)
 
 ```typescript
-import { GetEnv } from "@w3bstream/wasm-sdk";
+import { GetEnv, Log } from "@w3bstream/wasm-sdk";
+export { alloc } from "@w3bstream/wasm-sdk";
 
 export function start(rid: i32): i32 {
   const key = GetDataByRID(rid);
@@ -133,13 +145,24 @@ export function start(rid: i32): i32 {
 }
 ```
 
-
 ## More examples
 
 [JSON Example](./examples/json/index.ts)
 
 ## Build
 
-```bash
-npm run asbuild:<example>
+> https://www.assemblyscript.org/concepts.html#special-imports
+
+package.json
+
+```json
+"scripts": {
+    "asbuild:release": "asc assembly/index.ts --use abort=assembly/memory/abort --target release",
+  },
 ```
+
+Some language features need support from the host environment to function, yielding a few special module imports depending on the feature set used within the module. Generated bindings provide these automatically where necessary.
+
+- function env.abort?(message: usize, fileName: usize, line: u32, column: u32): void
+
+The respective implementations of , and can be overridden with, for example, , here redirecting calls to to a custom function in . Useful if an environment does not provide compatible implementations, or when the respective imports are not desired and custom implementations are sufficient.aborttraceseed--use abort=assembly/index/myAbortabortmyAbortassembly/index.ts
