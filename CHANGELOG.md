@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.2.0...v0.2.1) (2023-02-06)
+
+
+### Bug Fixes
+
+* **sql:** fix sql sdk ([971ffab](https://github.com/machinefi/w3bstream-wasm-ts-sdk/commit/971ffab5bc2cada6671955c9ebffa85816ff564c))
+
 # [0.2.0](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.1.9...v0.2.0) (2023-02-03)
 
 
