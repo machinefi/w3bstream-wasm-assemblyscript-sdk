@@ -20,19 +20,18 @@ abstract class SQLTypes {
   Time: string | null = null;
   Bool: bool | null = null;
   Bytes: string | null = null;
-  abstract pushSQLType(encoder: JSONEncoder): i32
+  abstract pushSQLType(encoder: JSONEncoder): i32;
 }
-
 
 class Int32 extends SQLTypes {
   Int32: i32;
   pushSQLType(encoder: JSONEncoder): i32 {
     encoder.setInteger("int32", this.Int32);
-    return 0
+    return 0;
   }
   constructor(value: i32) {
     super();
-    this.Int32 = value
+    this.Int32 = value;
   }
 }
 
@@ -40,11 +39,11 @@ class Int64 extends SQLTypes {
   Int64: i64;
   pushSQLType(encoder: JSONEncoder): i32 {
     encoder.setInteger("int64", this.Int64);
-    return 0
+    return 0;
   }
   constructor(value: i32) {
     super();
-    this.Int64 = value
+    this.Int64 = value;
   }
 }
 
@@ -52,11 +51,11 @@ class Float32 extends SQLTypes {
   Float32: f32;
   pushSQLType(encoder: JSONEncoder): i32 {
     encoder.setFloat("float32", this.Float32);
-    return 0
+    return 0;
   }
   constructor(value: i32) {
     super();
-    this.Float32 = value
+    this.Float32 = value;
   }
 }
 
@@ -64,11 +63,11 @@ class Float64 extends SQLTypes {
   Float64: f64;
   pushSQLType(encoder: JSONEncoder): i32 {
     encoder.setFloat("float64", this.Float64);
-    return 0
+    return 0;
   }
   constructor(value: i32) {
     super();
-    this.Float64 = value
+    this.Float64 = value;
   }
 }
 
@@ -76,11 +75,11 @@ class String extends SQLTypes {
   String: string;
   pushSQLType(encoder: JSONEncoder): i32 {
     encoder.setString("string", this.String);
-    return 0
+    return 0;
   }
   constructor(value: string) {
     super();
-    this.String = value
+    this.String = value;
   }
 }
 
@@ -91,11 +90,11 @@ class Time extends SQLTypes {
   Time: string;
   pushSQLType(encoder: JSONEncoder): i32 {
     encoder.setString("time", this.Time);
-    return 0
+    return 0;
   }
   constructor(value: string) {
     super();
-    this.Time = value
+    this.Time = value;
   }
 }
 
@@ -103,11 +102,11 @@ class Bool extends SQLTypes {
   Bool: bool;
   pushSQLType(encoder: JSONEncoder): i32 {
     encoder.setBoolean("bool", this.Bool);
-    return 0
+    return 0;
   }
   constructor(value: bool) {
     super();
-    this.Bool = value
+    this.Bool = value;
   }
 }
 
@@ -119,12 +118,12 @@ class Bytes extends SQLTypes {
   pushSQLType(encoder: JSONEncoder): i32 {
     //base64 encoding
     encoder.setString("bytes", this.Bytes);
-    return 0
+    return 0;
   }
   constructor(value: string) {
     super();
-    this.Bytes = value
+    this.Bytes = value;
   }
 }
 
-export { Int32, Int64, Float32, Float64, String, Time, Bool, Bytes }
+export { Int32, Int64, Float32, Float64, String, Time, Bool, Bytes, SQLTypes };

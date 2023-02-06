@@ -1,5 +1,5 @@
 import { JSON, JSONEncoder } from ".";
-import { dBQuery, SQLTypes } from "./sql";
+import {  SQLTypes } from "./sql";
 
 // @ts-ignore: decorator
 @external("env", "ws_log")
@@ -30,10 +30,6 @@ import { dBQuery, SQLTypes } from "./sql";
 @external("env", "ws_get_sql_db")
   declare function ws_get_sql_db(ptr: usize, size: u32, rAddr: u32, rSize: usize): i32
 
-// export {
-//   JSON,
-//   JSONEncoder,
-// } from "../node_modules/assemblyscript-json/assembly/index";
 export {
   JSON,
   JSONEncoder,
@@ -41,9 +37,6 @@ export {
 
 
 export function ExecSQL(query: string, args: SQLTypes[]): i32 {
-  // const params = args.map(v => v.getParam());
-  // const dbQuery = { Statement: query, Params: args };
-  //{ Statement: query, Params: [{Int32:12}] }
   let encoder = new JSONEncoder();
   encoder.pushObject(null)
   encoder.setString("statement", query);
@@ -52,7 +45,6 @@ export function ExecSQL(query: string, args: SQLTypes[]): i32 {
     const param: SQLTypes = args[i];
     encoder.pushObject(null)
     param.pushSQLType(encoder);
-    // encoder.setInteger("int32", param.getParmas())
     encoder.popObject()
   }
   encoder.popArray();
