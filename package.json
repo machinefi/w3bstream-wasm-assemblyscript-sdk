@@ -12,6 +12,7 @@
   },
   "scripts": {
     "test": "node tests",
+    "asbuild:abort": "asc examples/abort/index.ts --target debug -o ./build/abort.wasm",
     "asbuild:log": "asc examples/log/index.ts --target release -o ./build/log.wasm",
     "asbuild:json": "asc examples/json/index.ts --target release -o ./build/json.wasm",
     "asbuild:word_count": "asc examples/word_count/index.ts --target release -o ./build/word_count.wasm",

@@ -40,8 +40,8 @@ export {
 
 
 export function Abort(message: string, fileName: string, lineNumber: u32, columnNumber: u32): void {
-  let messageEncoded = String.UTF8.encode(message, true);
-  let fileNameEncoded = String.UTF8.encode(fileName, true);
+  let messageEncoded = String.UTF8.encode(message, false);
+  let fileNameEncoded = String.UTF8.encode(fileName, false);
   let message_ptr = changetype<usize>(messageEncoded);
   let fileName_ptr = changetype<usize>(fileNameEncoded);
   abort(message_ptr,fileName_ptr,lineNumber,columnNumber);
@@ -74,9 +74,9 @@ export function ExecSQL(query: string, args: SQLTypes[]): i32 {
 
 export function GetSQLDB(querySQL: string): string {
   //key to ptr
-  let keyEncoded = String.UTF8.encode(querySQL, true);
+  let keyEncoded = String.UTF8.encode(querySQL, false);
   let ptr = changetype<usize>(keyEncoded);
-  let size = keyEncoded.byteLength - 1;
+  let size = keyEncoded.byteLength;
 
   let rAddr = heap.alloc(sizeof<u32>());
   let rSize = heap.alloc(sizeof<u32>());
@@ -95,9 +95,9 @@ export function GetSQLDB(querySQL: string): string {
 
 
 export function GetEnv(key: string): string {
-  let kstrEncoded = String.UTF8.encode(key, true);
+  let kstrEncoded = String.UTF8.encode(key, false);
   let kaddr = changetype<usize>(kstrEncoded);
-  let ksize = kstrEncoded.byteLength - 1;
+  let ksize = kstrEncoded.byteLength;
 
   let vaddr: usize = heap.alloc(sizeof<u32>());
   let vsize: usize = heap.alloc(sizeof<u32>());
@@ -121,29 +121,29 @@ export function GetEnv(key: string): string {
 }
 
 export function Log(message: string): i32 {
-  let strEncoded = String.UTF8.encode(message, true);
+  let strEncoded = String.UTF8.encode(message, false);
   let message_ptr = changetype<usize>(strEncoded);
-  let message_size = strEncoded.byteLength - 1;
+  let message_size = strEncoded.byteLength;
   ws_log(3, message_ptr, message_size); // logInfoLevel = 3
   return 0;
 }
 
 export function SetDB(key: string, value: i32): i32 {
-  let keyEncoded = String.UTF8.encode(key, true);
+  let keyEncoded = String.UTF8.encode(key, false);
   let key_ptr = changetype<usize>(keyEncoded);
-  let key_size = keyEncoded.byteLength - 1;
-  let valueEncoded = String.UTF8.encode(value.toString(), true);
+  let key_size = keyEncoded.byteLength;
+  let valueEncoded = String.UTF8.encode(value.toString(), false);
   let value_ptr = changetype<usize>(valueEncoded);
-  let value_size = valueEncoded.byteLength - 1;
+  let value_size = valueEncoded.byteLength;
   ws_set_db(key_ptr, key_size, value_ptr, value_size);
   return 0;
 }
 
 export function GetDB(key: string): string {
   //key to ptr
-  let keyEncoded = String.UTF8.encode(key, true);
+  let keyEncoded = String.UTF8.encode(key, false);
   let key_ptr = changetype<usize>(keyEncoded);
-  let key_size = keyEncoded.byteLength - 1;
+  let key_size = keyEncoded.byteLength;
 
   let rAddr = heap.alloc(sizeof<u32>());
   let rSize = heap.alloc(sizeof<u32>());
@@ -178,9 +178,9 @@ export function GetDataByRID(rid: i32): string {
 }
 
 export function SendTx(chainId: i32, tx: string): string {
-  let txEncoded = String.UTF8.encode(tx, true);
+  let txEncoded = String.UTF8.encode(tx, false);
   let tx_ptr = changetype<usize>(txEncoded);
-  let tx_size = txEncoded.byteLength - 1;
+  let tx_size = txEncoded.byteLength;
 
   let vmAddrPtr = heap.alloc(sizeof<u32>());
   let vmSizePtr = heap.alloc(sizeof<u32>());
