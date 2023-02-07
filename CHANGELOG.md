@@ -1,3 +1,10 @@
+## [0.2.3](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.2.2...v0.2.3) (2023-02-07)
+
+
+### Bug Fixes
+
+* **sdk:** update UTF8.encode ([34592ae](https://github.com/machinefi/w3bstream-wasm-ts-sdk/commit/34592ae3e5c0a6460aa5326e12acf8df667d1a22))
+
 ## [0.2.2](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.2.1...v0.2.2) (2023-02-07)
 
 
