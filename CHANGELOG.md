@@ -1,3 +1,10 @@
+## [0.2.2](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.2.1...v0.2.2) (2023-02-07)
+
+
+### Bug Fixes
+
+* **abort:** remove abort ([0a0c3c2](https://github.com/machinefi/w3bstream-wasm-ts-sdk/commit/0a0c3c2ee35763ac32edaf0d3707cb3ae91397cd))
+
 ## [0.2.1](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.2.0...v0.2.1) (2023-02-06)
 
 
