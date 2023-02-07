@@ -2,6 +2,9 @@ import { JSON, JSONEncoder } from ".";
 import {  SQLTypes } from "./sql";
 
 // @ts-ignore: decorator
+@external("env", "abort")
+  declare function abort(message: usize ,fileName: usize ,lineNumber: u32,columnNumber: u32): void
+// @ts-ignore: decorator
 @external("env", "ws_log")
   declare function ws_log(logLevel: u8, ptr: usize, size: usize): i32
 // @ts-ignore: decorator
@@ -35,6 +38,14 @@ export {
   JSONEncoder,
 } from "assemblyscript-json/assembly/index";
 
+
+export function Abort(message: string, fileName: string, lineNumber: u32, columnNumber: u32): void {
+  let messageEncoded = String.UTF8.encode(message, true);
+  let fileNameEncoded = String.UTF8.encode(fileName, true);
+  let message_ptr = changetype<usize>(messageEncoded);
+  let fileName_ptr = changetype<usize>(fileNameEncoded);
+  abort(message_ptr,fileName_ptr,lineNumber,columnNumber);
+}
 
 export function ExecSQL(query: string, args: SQLTypes[]): i32 {
   let encoder = new JSONEncoder();
