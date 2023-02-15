@@ -16,7 +16,7 @@
     "asbuild:log": "asc examples/log/index.ts --target release -o ./build/log.wasm",
     "asbuild:json": "asc examples/json/index.ts --target release -o ./build/json.wasm",
     "asbuild:word_count": "asc examples/word_count/index.ts --target release -o ./build/word_count.wasm",
-    "asbuild:token_distribute": "asc examples/token_distribute/index.ts --target release -o ./build/token_distribute.wasm",
+    "asbuild:token_distribute": "asc examples/token_distribute/index.ts --use abort=examples/token_distribute/index/abort --target release -o ./build/token_distribute.wasm",
     "asbuild:erc20_mint": "asc examples/erc20_mint/index.ts --target release -o ./build/erc20_mint.wasm",
     "asbuild:erc721_mint": "asc examples/erc721_mint/index.ts --target release -o ./build/erc721_mint.wasm",
     "asbuild:env": "asc examples/env/index.ts --target release -o ./build/env.wasm",

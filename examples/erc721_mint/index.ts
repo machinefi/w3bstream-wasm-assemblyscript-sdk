@@ -1,6 +1,5 @@
-
 import { GetDataByRID, JSON, Log, SendTx } from "../../assembly/index";
-export { alloc } from "../../assembly/index"
+export { alloc } from "../../assembly/index";
 
 export function start(rid: i32): i32 {
   Log("start from typescript");
@@ -17,15 +16,16 @@ export function start(rid: i32): i32 {
   let ERC20Address: JSON.Str | null = jsonObj.getString("address");
   let MintTo: JSON.Str | null = jsonObj.getString("mintTo");
   if (chainIdOrNull && ERC20Address && MintTo) {
-    const res = SendTx(4690, `
-    {
-        "to": "${ERC20Address.valueOf()}",
-        "value": "0",
-        "data": "6a627842000000000000000000000000${MintTo.valueOf().replace('0x', '')}"
-    }`);
-    Log("wasm send tx result:" + res)
+    const res = SendTx(
+      4690,
+      ERC20Address.valueOf(),
+      "0",
+      `
+    6a627842000000000000000000000000${MintTo.valueOf().replace("0x", "")}`
+    );
+    Log("wasm send tx result:" + res);
   } else {
-    Log(`params invalid`)
+    Log(`params invalid`);
   }
   return 0;
 }

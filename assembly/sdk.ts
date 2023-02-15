@@ -19,19 +19,22 @@ import {  SQLTypes } from "./sql";
 // @ts-ignore: decorator
 @external("env", "ws_set_data")
   declare function ws_set_data(rid: i32, ptr: usize, size: u32): i32
-// @ts-ignore: decorator
-@external("env", "ws_send_tx")
+  // @ts-ignore: decorator
+  @external("env", "ws_get_env")
+  declare function ws_get_env(kaddr: usize, ksize: usize, vaddr: usize, vsize: usize): i32
+  // @ts-ignore: decorator
+  @external("env", "ws_set_sql_db")
+  declare function ws_set_sql_db(ptr: usize, size: u32): i32
+  // @ts-ignore: decorator
+  @external("env", "ws_get_sql_db")
+  declare function ws_get_sql_db(ptr: usize, size: u32, rAddr: u32, rSize: usize): i32
+  // @ts-ignore: decorator
+  @external("env", "ws_send_tx")
   // declare function ws_send_tx(ptr: usize, size: u32): i32
   declare function ws_send_tx(chainID: i32, offset: usize, size: usize, vmAddrPtr: usize, vmSizePtr: usize): i32
-// @ts-ignore: decorator
-@external("env", "ws_get_env")
-  declare function ws_get_env(kaddr: usize, ksize: usize, vaddr: usize, vsize: usize): i32
-// @ts-ignore: decorator
-@external("env", "ws_set_sql_db")
-  declare function ws_set_sql_db(ptr: usize, size: u32): i32
-// @ts-ignore: decorator
-@external("env", "ws_get_sql_db")
-  declare function ws_get_sql_db(ptr: usize, size: u32, rAddr: u32, rSize: usize): i32
+  // @ts-ignore: decorator
+  @external("env", "ws_call_contract")
+  declare function ws_call_contract(chainID: i32, offset: usize, size: usize, vmAddrPtr: usize, vmSizePtr: usize): i32
 
 export {
   JSON,
@@ -66,7 +69,7 @@ export function ExecSQL(query: string, args: SQLTypes[]): i32 {
   let key_ptr = changetype<usize>(serializedQuery.buffer);
   const ret = ws_set_sql_db(key_ptr, serializedQuery.length);
   if (ret !== 0) {
-    Log("fail to execute the sql query");
+    assert(false, "fail to execute the sql query");
   }
 
   return 0;
@@ -83,7 +86,7 @@ export function GetSQLDB(querySQL: string): string {
 
   let code = ws_get_sql_db(ptr, size, rAddr, rSize);
   if (code != 0) {
-    return "";
+    assert(false, `GetSQLDB failed`);
   }
   let rAddrValue = load<u32>(rAddr);
   let rAddrSize = load<u32>(rSize);
@@ -105,14 +108,14 @@ export function GetEnv(key: string): string {
   let code = ws_get_env(kaddr, ksize, vaddr, vsize);
 
   if (code != 0) {
-    Log(`get env failed: key: ${key} code: ${code}`);
+    assert(false, `get env failed: key: ${key} addr: ${vaddr}`);
     return "";
   }
 
   let m = load<u32>(vaddr);
   let mSize = load<u32>(vsize);
   if (!m) {
-    Log(`get env failed: key: ${key} addr: ${vaddr}`);
+    assert(false, `get env failed: key: ${key} addr: ${vaddr}`);
     return "";
   }
   heap.free(vaddr);
@@ -150,7 +153,7 @@ export function GetDB(key: string): string {
 
   let code = ws_get_db(key_ptr, key_size, rAddr, rSize);
   if (code != 0) {
-    return "";
+      assert(false, "GetDB failed");
   }
   let rAddrValue = load<u32>(rAddr);
   let rAddrSize = load<u32>(rSize);
@@ -177,7 +180,14 @@ export function GetDataByRID(rid: i32): string {
   return "";
 }
 
-export function SendTx(chainId: i32, tx: string): string {
+export function SendTx(chainId: i32, to:string, value:string ,data:string): string {
+  let tx = `
+  {
+      "to": "${to}",
+      "value": "${value}",
+      "data": "${data.replace('0x','')}"
+  }`
+  Log(tx)
   let txEncoded = String.UTF8.encode(tx, false);
   let tx_ptr = changetype<usize>(txEncoded);
   let tx_size = txEncoded.byteLength;
@@ -186,6 +196,10 @@ export function SendTx(chainId: i32, tx: string): string {
   let vmSizePtr = heap.alloc(sizeof<u32>());
 
   const ret = ws_send_tx(chainId, tx_ptr, tx_size, vmAddrPtr, vmSizePtr);
+
+  if(ret!=0) {
+    assert(false, "send tx failed");
+  }
 
   let vmAddr = load<u32>(vmAddrPtr);
   let vmSize = load<u32>(vmSizePtr);
@@ -198,3 +212,32 @@ export function SendTx(chainId: i32, tx: string): string {
   return vm;
 }
 
+export function CallContract(chainId:i32,to:string,data:string):string {
+  let tx = `
+  {
+      "to": "${to}",
+      "data": "${data.replace('0x','')}"
+  }`
+  let txEncoded = String.UTF8.encode(tx, false);
+  let tx_ptr = changetype<usize>(txEncoded);
+  let tx_size = txEncoded.byteLength;
+
+  let vmAddrPtr = heap.alloc(sizeof<u32>());
+  let vmSizePtr = heap.alloc(sizeof<u32>());
+
+  const ret = ws_call_contract(chainId, tx_ptr, tx_size, vmAddrPtr, vmSizePtr);
+
+  if(ret!=0) {
+    assert(false, "send tx failed");
+  }
+
+  let vmAddr = load<u32>(vmAddrPtr);
+  let vmSize = load<u32>(vmSizePtr);
+
+  let vm = String.UTF8.decodeUnsafe(vmAddr, vmSize, true);
+
+  heap.free(vmAddrPtr);
+  heap.free(vmSizePtr);
+
+  return vm;
+}
