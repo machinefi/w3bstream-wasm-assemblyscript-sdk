@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.2.3...v0.3.0) (2023-02-15)
+
+
+### Features
+
+* **sdk:** add CallContract , update send tx param ([72a7d94](https://github.com/machinefi/w3bstream-wasm-ts-sdk/commit/72a7d9498dfc598c34c2406e0e1c3d77131d78e9))
+
 ## [0.2.3](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.2.2...v0.2.3) (2023-02-07)
 
 
