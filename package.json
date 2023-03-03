@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk.git"
+    "url": "https://github.com/machinefi/w3bstream-wasm-ts-sdk.git"
   },
   "publishConfig": {
     "access": "public"
