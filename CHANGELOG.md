@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.3.0...v0.3.1) (2023-03-03)
+
+
+### Bug Fixes
+
+* **sdk:** fix GetDB return value ([6aad7ec](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/6aad7eccf66d2fc89c093a920b532cff0d73da82))
+
 # [0.3.0](https://github.com/machinefi/w3bstream-wasm-ts-sdk/compare/v0.2.3...v0.3.0) (2023-02-15)
 
 
