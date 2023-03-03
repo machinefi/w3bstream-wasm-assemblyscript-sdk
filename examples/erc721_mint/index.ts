@@ -17,11 +17,10 @@ export function start(rid: i32): i32 {
   let MintTo: JSON.Str | null = jsonObj.getString("mintTo");
   if (chainIdOrNull && ERC20Address && MintTo) {
     const res = SendTx(
-      4690,
+      chainIdOrNull.valueOf() as i32,
       ERC20Address.valueOf(),
       "0",
-      `
-    6a627842000000000000000000000000${MintTo.valueOf().replace("0x", "")}`
+      `6a627842000000000000000000000000${MintTo.valueOf().replace("0x", "")}`
     );
     Log("wasm send tx result:" + res);
   } else {
@@ -29,3 +28,9 @@ export function start(rid: i32): i32 {
   }
   return 0;
 }
+export function abort(
+  message: string | null,
+  fileName: string | null,
+  lineNumber: u32,
+  columnNumber: u32
+): void {}

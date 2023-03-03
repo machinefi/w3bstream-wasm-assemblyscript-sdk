@@ -12,7 +12,7 @@ import {  SQLTypes } from "./sql";
   declare function ws_set_db(key_ptr: usize, ket_size: i32, return_ptr: usize, return_size: i32): i32
 // @ts-ignore: decorator
 @external("env", "ws_get_db")
-  declare function ws_get_db(addr: usize, size: usize, rAddr: usize, rSize: u32): i32
+  declare function ws_get_db(addr: usize, size: usize, rAddr: usize, rSize: usize): i32
 // @ts-ignore: decorator
 @external("env", "ws_get_data")
   declare function ws_get_data(rid: i32, data_ptr: usize, size_ptr: usize): i32
@@ -142,7 +142,7 @@ export function SetDB(key: string, value: i32): i32 {
   return 0;
 }
 
-export function GetDB(key: string): string {
+export function GetDB(key: string): string | null {
   //key to ptr
   let keyEncoded = String.UTF8.encode(key, false);
   let key_ptr = changetype<usize>(keyEncoded);
@@ -153,7 +153,8 @@ export function GetDB(key: string): string {
 
   let code = ws_get_db(key_ptr, key_size, rAddr, rSize);
   if (code != 0) {
-      assert(false, "GetDB failed");
+      return null
+      // assert(false, "GetDB failed");
   }
   let rAddrValue = load<u32>(rAddr);
   let rAddrSize = load<u32>(rSize);

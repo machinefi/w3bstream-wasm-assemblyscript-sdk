@@ -18,7 +18,7 @@ export function start(rid: i32): i32 {
   let MintTo: JSON.Str | null = jsonObj.getString("mintTo");
   if (chainIdOrNull && ERC20Address && MintTo) {
     const res = SendTx(
-      4690,
+      chainIdOrNull.valueOf() as i32,
       ERC20Address.valueOf(),
       "0",
       `0x40c10f19000000000000000000000000${MintTo.valueOf().replace(
@@ -32,3 +32,11 @@ export function start(rid: i32): i32 {
   }
   return 0;
 }
+
+
+export function abort(
+  message: string | null,
+  fileName: string | null,
+  lineNumber: u32,
+  columnNumber: u32
+): void { }
