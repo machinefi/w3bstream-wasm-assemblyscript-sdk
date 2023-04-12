@@ -28,7 +28,7 @@
   "author": "@w3bstream",
   "license": "ISC",
   "dependencies": {
-    "@w3bstream/wasm-sdk": "^0.3.2",
+    "@w3bstream/wasm-sdk": "^0.4.0",
     "assemblyscript": "^0.26.7",
     "assemblyscript-json": "^1.1.0"
   },
