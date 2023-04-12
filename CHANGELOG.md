@@ -1,3 +1,10 @@
+## [0.3.2](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.3.1...v0.3.2) (2023-04-12)
+
+
+### Bug Fixes
+
+* **sql:** sql type error ([5c9e082](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/5c9e08203c7e38889c6234eb5f476929b1292566))
+
 ## [0.3.1](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.3.0...v0.3.1) (2023-03-03)
 
 
