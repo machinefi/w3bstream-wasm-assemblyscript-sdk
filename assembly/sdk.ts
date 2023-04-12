@@ -1,5 +1,5 @@
 import { JSON, JSONEncoder } from ".";
-import {  SQLTypes } from "./sql";
+import {  Bytes, SQLTypes } from "./sql";
 
 // @ts-ignore: decorator
 @external("env", "abort")
@@ -48,6 +48,42 @@ export function Abort(message: string, fileName: string, lineNumber: u32, column
   let message_ptr = changetype<usize>(messageEncoded);
   let fileName_ptr = changetype<usize>(fileNameEncoded);
   abort(message_ptr,fileName_ptr,lineNumber,columnNumber);
+}
+
+export function QuerySQL(query:string,args:SQLTypes[] = []):string {
+  let encoder = new JSONEncoder();
+  encoder.pushObject(null)
+  encoder.setString("statement", query);
+  encoder.pushArray("params");
+  if(args.length!=0){
+    for (let i = 0; i < args.length; i++) {
+      const param: SQLTypes = args[i];
+      encoder.pushObject(null)
+      param.pushSQLType(encoder);
+      encoder.popObject()
+    }
+  }
+  encoder.popArray();
+  encoder.popObject();
+  let serializedQuery = encoder.serialize();
+  let string = encoder.toString()
+  Log(string)
+
+  let key_ptr = changetype<usize>(serializedQuery.buffer);
+  let rAddr = heap.alloc(sizeof<u32>());
+  let rSize = heap.alloc(sizeof<u32>());
+
+  let code = ws_get_sql_db(key_ptr, serializedQuery.length, rAddr, rSize);
+  Log("code:"+code.toString())
+  if (code != 0) {
+    assert(false, `QuerySQL failed`);
+  }
+  let rAddrValue = load<u32>(rAddr);
+  let rAddrSize = load<u32>(rSize);
+  let data = String.UTF8.decodeUnsafe(rAddrValue, rAddrSize, true);
+  heap.free(rAddr);
+  heap.free(rSize);
+  return data;
 }
 
 export function ExecSQL(query: string, args: SQLTypes[]): i32 {
