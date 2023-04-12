@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.3.2...v0.4.0) (2023-04-12)
+
+
+### Features
+
+* **sql:** add QuerySQL api ([dcdfff5](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/dcdfff58ca669965ae1a9ec568b55b0ff6237e36))
+
 ## [0.3.2](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.3.1...v0.3.2) (2023-04-12)
 
 
