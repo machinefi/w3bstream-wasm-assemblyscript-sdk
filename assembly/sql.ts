@@ -12,14 +12,14 @@
 import { JSONEncoder } from "./sdk";
 
 abstract class SQLTypes {
-  Int32: i32 | null = null;
-  Int64: i64 | null = null;
-  Float32: f32 | null = null;
-  Float64: f64 | null = null;
-  String: string | null = null;
-  Time: string | null = null;
-  Bool: bool | null = null;
-  Bytes: string | null = null;
+  Int32!: i32;
+  Int64!: i64;
+  Float32!: f32;
+  Float64!: f64;
+  String!: string;
+  Time!: string;
+  Bool!: bool;
+  Bytes!: string;
   abstract pushSQLType(encoder: JSONEncoder): i32;
 }
 
@@ -53,7 +53,7 @@ class Float32 extends SQLTypes {
     encoder.setFloat("float32", this.Float32);
     return 0;
   }
-  constructor(value: i32) {
+  constructor(value: f32) {
     super();
     this.Float32 = value;
   }
@@ -65,7 +65,7 @@ class Float64 extends SQLTypes {
     encoder.setFloat("float64", this.Float64);
     return 0;
   }
-  constructor(value: i32) {
+  constructor(value: f64) {
     super();
     this.Float64 = value;
   }

@@ -1,5 +1,5 @@
-import { GetDataByRID, JSON, Log, SendTx } from "../../assembly/index";
-export { alloc } from "../../assembly/index";
+import { GetDataByRID, JSON, Log, SendTx } from "@w3bstream/wasm-sdk";
+export { alloc } from "@w3bstream/wasm-sdk";
 
 export function start(rid: i32): i32 {
   Log("start from typescript");
