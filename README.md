@@ -1,6 +1,6 @@
 # @w3bstream/wasm-sdk
 
-This is the official assemblyscript sdk for w3bstream.
+This is the official assemblyscript sdk for W3bstream.
 
 ## Installation
 
@@ -182,6 +182,23 @@ The respective implementations of , and can be overridden with, for example, , h
 - If the `pnpm` installation package is used, dependencies may not be correctly installed. You can use `npm` or `yarn` to install dependencies
 
 
-## More examples
+## Run examples
+Examples can be found in the ./examples folder.
 
-[JSON Example](./examples/json/index.ts)
+To build an example, from the main SDK folder type:
+```
+npm install
+npm run build:<example_name>
+```
+Available examples are:
+- abort - Tests the call of the `abort` function on the W3bstream VM side by calling `assert` in your applet.
+- click2earn - a simple applet that mints ERC20 tokens every 5 "click" messages are received
+- env - shows how to retrieve env variable for the parent project (a defined in the project's settings on dev.w3bstream.com)
+- erc20_mint - a basic example that shows how to mint ERC20 tokens from an applet according to the info included in the data message
+- json - shows how to parse a data message and extract specific fields
+- sql - shows how to insert and query data from W3bstreams database using SQL
+- token_distribute - another basic example that sends ERC20 tokens to a wallet
+- vm - another example of using `assert` in your applet
+- word_count - counts the number of words included in a message payload and shows how to save it in W3bstream's key/value storage. 
+
+
