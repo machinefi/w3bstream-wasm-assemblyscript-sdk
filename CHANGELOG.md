@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.4.0...v0.4.1) (2023-04-17)
+
+
+### Bug Fixes
+
+* **log:** update log level ([e0a51ea](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/e0a51ea41401cc6055b77aa19acc07bbc4693006))
+
 # [0.4.0](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.3.2...v0.4.0) (2023-04-12)
 
 
