@@ -8,12 +8,9 @@ export function start(rid: i32): i32 {
   // let word = message.split("");
   SetDB("wordCount", 2);
   let value = GetDB("wordCount");
-  Log("wasm get value:" + (value && value.toString()));
+  if (value) {
+    Log("wasm get value:" + value.toString());
+  }
   return 0;
 }
-export function abort(
-  message: string | null,
-  fileName: string | null,
-  lineNumber: u32,
-  columnNumber: u32
-): void {}
+export function abort(message: string | null, fileName: string | null, lineNumber: u32, columnNumber: u32): void {}

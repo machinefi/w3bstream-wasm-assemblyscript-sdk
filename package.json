@@ -10,25 +10,29 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "test": "node tests",
-    "asbuild:abort": "asc examples/abort/index.ts --target debug -o ./build/abort.wasm",
+    "asbuild:abort": "asc examples/abort/index.ts --target release -o ./build/abort.wasm",
     "asbuild:log": "asc examples/log/index.ts --target release -o ./build/log.wasm",
     "asbuild:json": "asc examples/json/index.ts --target release -o ./build/json.wasm",
-    "asbuild:word_count": "asc examples/word_count/index.ts --target release --use abort=examples/word_count/index/abort  -o ./build/word_count.wasm",
-    "asbuild:token_distribute": "asc examples/token_distribute/index.ts --use abort=examples/token_distribute/index/abort --target release -o ./build/token_distribute.wasm",
-    "asbuild:erc20_mint": "asc examples/erc20_mint/index.ts --target release --use abort=examples/erc20_mint/index/abort -o ./build/erc20_mint.wasm",
-    "asbuild:click2earn": "asc examples/click2earn/index.ts --target release --use abort=examples/click2earn/index/abort -o ./build/click2earn.wasm",
-    "asbuild:erc721_mint": "asc examples/erc721_mint/index.ts --target release --use abort=examples/erc721_mint/index/abort -o ./build/erc721_mint.wasm",
+    "asbuild:word_count": "asc examples/word_count/index.ts --target release   -o ./build/word_count.wasm",
+    "asbuild:token_distribute": "asc examples/token_distribute/index.ts --target release -o ./build/token_distribute.wasm",
+    "asbuild:erc20_mint": "asc examples/erc20_mint/index.ts --target release -o ./build/erc20_mint.wasm",
+    "asbuild:click2earn": "asc examples/click2earn/index.ts --target release -o ./build/click2earn.wasm",
+    "asbuild:erc721_mint": "asc examples/erc721_mint/index.ts --target release -o ./build/erc721_mint.wasm",
     "asbuild:env": "asc examples/env/index.ts --target release -o ./build/env.wasm",
     "asbuild:sql": "asc examples/sql/index.ts --target release -o ./build/sql.wasm",
     "asbuild:vm": "asc examples/vm/index.ts --target release -o ./build/vm.wasm",
+    "asbuild:all": "npm run asbuild:abort & npm run asbuild:log & npm run asbuild:json & npm run asbuild:word_count & npm run asbuild:token_distribute & npm run asbuild:erc20_mint & npm run asbuild:click2earn & npm run asbuild:erc721_mint & npm run asbuild:env & npm run asbuild:sql & npm run asbuild:vm",
     "start": "npx serve ."
   },
   "author": "@w3bstream",
   "license": "ISC",
   "dependencies": {
-    "@w3bstream/wasm-sdk": "^0.4.0",
+    "@w3bstream/wasm-sdk": "^0.4.1",
     "assemblyscript": "^0.26.7",
     "assemblyscript-json": "^1.1.0"
   },

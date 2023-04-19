@@ -6,35 +6,35 @@ import {  Bytes, SQLTypes } from "./sql";
   declare function abort(message: usize ,fileName: usize ,lineNumber: u32,columnNumber: u32): void
 // @ts-ignore: decorator
 @external("env", "ws_log")
-  declare function ws_log(logLevel: u8, ptr: usize, size: usize): i32
+  declare function ws_log(logLevel: u8, ptr: usize, size: i32): i32
 // @ts-ignore: decorator
 @external("env", "ws_set_db")
   declare function ws_set_db(key_ptr: usize, ket_size: i32, return_ptr: usize, return_size: i32): i32
 // @ts-ignore: decorator
 @external("env", "ws_get_db")
-  declare function ws_get_db(addr: usize, size: usize, rAddr: usize, rSize: usize): i32
+  declare function ws_get_db(addr: usize, size: i32, rAddr: usize, rSize: i32): i32
 // @ts-ignore: decorator
 @external("env", "ws_get_data")
   declare function ws_get_data(rid: i32, data_ptr: usize, size_ptr: usize): i32
 // @ts-ignore: decorator
 @external("env", "ws_set_data")
-  declare function ws_set_data(rid: i32, ptr: usize, size: u32): i32
+  declare function ws_set_data(rid: i32, ptr: usize, size: i32): i32
   // @ts-ignore: decorator
   @external("env", "ws_get_env")
-  declare function ws_get_env(kaddr: usize, ksize: usize, vaddr: usize, vsize: usize): i32
+  declare function ws_get_env(kaddr: usize, ksize: i32, vaddr: usize, vsize: i32): i32
   // @ts-ignore: decorator
   @external("env", "ws_set_sql_db")
-  declare function ws_set_sql_db(ptr: usize, size: u32): i32
+  declare function ws_set_sql_db(ptr: usize, size: i32): i32
   // @ts-ignore: decorator
   @external("env", "ws_get_sql_db")
-  declare function ws_get_sql_db(ptr: usize, size: u32, rAddr: u32, rSize: usize): i32
+  declare function ws_get_sql_db(ptr: usize, size: i32, rAddr: u32, rSize: u32): i32
   // @ts-ignore: decorator
   @external("env", "ws_send_tx")
   // declare function ws_send_tx(ptr: usize, size: u32): i32
-  declare function ws_send_tx(chainID: i32, offset: usize, size: usize, vmAddrPtr: usize, vmSizePtr: usize): i32
+  declare function ws_send_tx(chainID: i32, offset: usize, size: i32, vmAddrPtr: usize, vmSizePtr: usize): i32
   // @ts-ignore: decorator
   @external("env", "ws_call_contract")
-  declare function ws_call_contract(chainID: i32, offset: usize, size: usize, vmAddrPtr: usize, vmSizePtr: usize): i32
+  declare function ws_call_contract(chainID: i32, offset: usize, size: i32, vmAddrPtr: usize, vmSizePtr: usize): i32
 
 export {
   JSON,
@@ -69,11 +69,11 @@ export function QuerySQL(query:string,args:SQLTypes[] = []):string {
   let string = encoder.toString()
   Log(string)
 
-  let key_ptr = changetype<usize>(serializedQuery.buffer);
-  let rAddr = heap.alloc(sizeof<u32>());
-  let rSize = heap.alloc(sizeof<u32>());
+  let key_ptr = changetype<usize>(serializedQuery.buffer) ;
+  let rAddr:usize = heap.alloc(sizeof<u32>());
+  let rSize:usize = heap.alloc(sizeof<u32>());
 
-  let code = ws_get_sql_db(key_ptr, serializedQuery.length, rAddr, rSize);
+  let code = ws_get_sql_db(key_ptr, serializedQuery.length, rAddr as u32, rSize as u32);
   Log("code:"+code.toString())
   if (code != 0) {
     assert(false, `QuerySQL failed`);
