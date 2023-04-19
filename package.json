@@ -10,9 +10,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "scripts": {
     "test": "node tests",
     "asbuild:abort": "asc examples/abort/index.ts --target release -o ./build/abort.wasm",
@@ -32,7 +29,7 @@
   "author": "@w3bstream",
   "license": "ISC",
   "dependencies": {
-    "@w3bstream/wasm-sdk": "^0.4.1",
+    "@w3bstream/wasm-sdk": "^0.4.2",
     "assemblyscript": "^0.26.7",
     "assemblyscript-json": "^1.1.0"
   },
