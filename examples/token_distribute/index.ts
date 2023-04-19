@@ -2,7 +2,6 @@ import { CallContract, GetDataByRID, Log, SendTx } from "@w3bstream/wasm-sdk";
 export { alloc } from "@w3bstream/wasm-sdk";
 
 export function start(rid: i32): i32 {
-  Log("start from typescript");
   const message = GetDataByRID(rid);
   Log("wasm received message:" + message);
   const ERC20Addr = `0xb73eE6EB5b1984c78CCcC49eA7Ad773E71d74F51`;

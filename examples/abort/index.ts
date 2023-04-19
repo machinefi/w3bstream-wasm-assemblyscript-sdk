@@ -1,10 +1,9 @@
 import { GetDataByRID, Log } from "@w3bstream/wasm-sdk";
 export { alloc } from "@w3bstream/wasm-sdk";
 
-export function start(rid: i32): string {
-  Log("start from typescript");
+export function start(rid: i32): i32 {
   const message = GetDataByRID(rid);
-  assert(false, "test assert222");
+  assert(false, "test assert");
   Log("wasm received message:" + message);
-  return "123";
+  return 0;
 }
