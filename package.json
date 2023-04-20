@@ -3,6 +3,9 @@
   "version": "0.4.2",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk.git"

@@ -3,6 +3,7 @@
 This is the official assemblyscript sdk for W3bstream.
 
 ## Installation
+The package requires node.js `>=16.0.0`
 
 ```bash
 npm install @w3bstream/wasm-sdk
@@ -123,10 +124,7 @@ export function start(rid: i32): i32 {
   const key = GetDataByRID(rid);
   const v = new Map<string, i32>();
   v.set("int32", 1);
-  const value = ExecSQL(`INSERT INTO "f_table" (f_id,f_gender) VALUES (?,?);`, [
-    v,
-    v,
-  ]);
+  const value = ExecSQL(`INSERT INTO "f_table" (f_id,f_gender) VALUES (?,?);`, [v, v]);
   return 0;
 }
 ```
@@ -145,22 +143,15 @@ export function start(rid: i32): i32 {
 }
 ```
 
-
 ## Build
 
 > https://www.assemblyscript.org/concepts.html#special-imports
-
 
 The abort method will be exposed inside w3bstream in later versions
 [issues/308](https://github.com/machinefi/w3bstream/issues/308)
 
 ```typescript
-export function abort(
-  message: string | null,
-  fileName: string | null,
-  lineNumber: u32,
-  columnNumber: u32
-): void { }
+export function abort(message: string | null, fileName: string | null, lineNumber: u32, columnNumber: u32): void {}
 ```
 
 package.json
@@ -177,20 +168,23 @@ Some language features need support from the host environment to function, yield
 
 The respective implementations of , and can be overridden with, for example, , here redirecting calls to to a custom function in . Useful if an environment does not provide compatible implementations, or when the respective imports are not desired and custom implementations are sufficient.aborttraceseed--use abort=assembly/index/myAbortabortmyAbortassembly/index.ts
 
-
 ## Known Issues
+
 - If the `pnpm` installation package is used, dependencies may not be correctly installed. You can use `npm` or `yarn` to install dependencies
 
-
 ## Run examples
+
 Examples can be found in the ./examples folder.
 
 To build an example, from the main SDK folder type:
+
 ```
 npm install
 npm run build:<example_name>
 ```
+
 Available examples are:
+
 - `abort` - Tests the call of the `abort` function on the W3bstream VM side by calling `assert` in your applet.
 - `click2earn` - a simple applet that mints ERC20 tokens every 5 "click" messages are received
 - `env` - shows how to retrieve env variable for the parent project (a defined in the project's settings on dev.w3bstream.com)
@@ -199,6 +193,4 @@ Available examples are:
 - `sql` - shows how to insert and query data from W3bstreams database using SQL
 - `token_distribute` - another basic example that sends ERC20 tokens to a wallet
 - `vm` - another example of using `assert` in your applet
-- `word_count` - counts the number of words included in a message payload and shows how to save it in W3bstream's key/value storage. 
-
-
+- `word_count` - counts the number of words included in a message payload and shows how to save it in W3bstream's key/value storage.
