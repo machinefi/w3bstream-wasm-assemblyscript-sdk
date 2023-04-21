@@ -12,14 +12,14 @@
 import { JSONEncoder } from "./sdk";
 
 abstract class SQLTypes {
-  Int32!: i32;
-  Int64!: i64;
-  Float32!: f32;
-  Float64!: f64;
-  String!: string;
-  Time!: string;
-  Bool!: bool;
-  Bytes!: string;
+  Int32: i32 = 0;
+  Int64: i64 = 0;
+  Float32: f32 = 0;
+  Float64: f64 = 0;
+  String: string = "";
+  Time: string = "";
+  Bool: bool = false;
+  Bytes: string = "";
   abstract pushSQLType(encoder: JSONEncoder): i32;
 }
 
