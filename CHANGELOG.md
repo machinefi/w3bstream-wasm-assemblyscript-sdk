@@ -1,3 +1,10 @@
+## [0.4.5](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.4.4...v0.4.5) (2023-04-23)
+
+
+### Bug Fixes
+
+* **sql:** Int64 type error ([fb27254](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/fb2725412a440c81141383aa807c6409b1793a7d))
+
 ## [0.4.4](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.4.3...v0.4.4) (2023-04-21)
 
 
