@@ -37,11 +37,11 @@ class Int32 extends SQLTypes {
 
 class Int64 extends SQLTypes {
   Int64: i64;
-  pushSQLType(encoder: JSONEncoder): i32 {
+  pushSQLType(encoder: JSONEncoder): i64 {
     encoder.setInteger("int64", this.Int64);
     return 0;
   }
-  constructor(value: i32) {
+  constructor(value: i64) {
     super();
     this.Int64 = value;
   }
