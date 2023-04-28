@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.4.5...v0.5.0) (2023-04-28)
+
+
+### Features
+
+* **call_contract:**  add call_contract example ([466fb8b](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/466fb8b54b48d4329e4d4c1ccf01146d2edf605c))
+
 ## [0.4.5](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.4.4...v0.4.5) (2023-04-23)
 
 
