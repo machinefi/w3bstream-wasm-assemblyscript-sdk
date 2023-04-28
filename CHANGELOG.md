@@ -1,3 +1,10 @@
+## [0.6.1](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.6.0...v0.6.1) (2023-04-28)
+
+
+### Bug Fixes
+
+* **sdk:** import issues ([acfc018](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/acfc01867ad51115713f9ef94a77a325beea92ee))
+
 # [0.6.0](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.5.0...v0.6.0) (2023-04-28)
 
 
