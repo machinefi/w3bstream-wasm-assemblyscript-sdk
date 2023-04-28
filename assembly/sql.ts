@@ -37,7 +37,7 @@ class Int32 extends SQLTypes {
 
 class Int64 extends SQLTypes {
   Int64: i64;
-  pushSQLType(encoder: JSONEncoder): i64 {
+  pushSQLType(encoder: JSONEncoder): i32 {
     encoder.setInteger("int64", this.Int64);
     return 0;
   }
