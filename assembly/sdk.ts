@@ -315,3 +315,7 @@ export function hexToBool(hexString: string): bool {
   }
   return !isZero;
 }
+
+export function hexToAddress(hexString: string): string {
+  return hexString.slice(24);
+}
