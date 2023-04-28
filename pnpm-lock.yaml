@@ -4,13 +4,13 @@ specifiers:
   '@semantic-release/changelog': ^6.0.2
   '@semantic-release/git': ^10.0.1
   '@semantic-release/npm': ^9.0.2
-  '@w3bstream/wasm-sdk': ^0.6.0
+  '@w3bstream/wasm-sdk': ^0.6.1
   assemblyscript: ^0.26.7
   assemblyscript-json: ^1.1.0
   semantic-release: ^20.1.0
 
 dependencies:
-  '@w3bstream/wasm-sdk': 0.6.0
+  '@w3bstream/wasm-sdk': 0.6.1
   assemblyscript: 0.26.7
   assemblyscript-json: 1.1.0
 
@@ -351,19 +351,10 @@ packages:
     resolution: {integrity: sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==}
     dev: true
 
-  /@w3bstream/wasm-sdk/0.4.5:
-    resolution: {integrity: sha512-P7oBZtpgKGgKAFyPTWuWHpUPQYPThlcoR242hOwPCUarsPKhgU5Lc5igBB32udNAzwoB1nn8MGKHVOBKYDeA4w==}
+  /@w3bstream/wasm-sdk/0.6.1:
+    resolution: {integrity: sha512-Eg3zwcAvYLfyyAH6pDq8sEgW6bWuCEpkmrEn45dg/zQgRoEHjXUiKpnuUQncJ3XbY0Dk2/fcdGBitZUSSoNn5w==}
     engines: {node: '>=16.0.0'}
     dependencies:
-      assemblyscript: 0.26.7
-      assemblyscript-json: 1.1.0
-    dev: false
-
-  /@w3bstream/wasm-sdk/0.6.0:
-    resolution: {integrity: sha512-rIBxEO1WWo+IMnnFxOB1ILadE+IoINfzhbQB/xrcYyGD7fmv0JBWxSUlOh/+d/R0eaQ2RPiOWGLUqt0TYRAEaw==}
-    engines: {node: '>=16.0.0'}
-    dependencies:
-      '@w3bstream/wasm-sdk': 0.4.5
       assemblyscript: 0.26.7
       assemblyscript-json: 1.1.0
     dev: false
