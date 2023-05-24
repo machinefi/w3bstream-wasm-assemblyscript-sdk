@@ -33,7 +33,7 @@
   "author": "@w3bstream",
   "license": "ISC",
   "dependencies": {
-    "@w3bstream/wasm-sdk": "^0.6.2",
+    "@w3bstream/wasm-sdk": "^0.6.4",
     "assemblyscript": "^0.26.7",
     "assemblyscript-json": "^1.1.0"
   },
