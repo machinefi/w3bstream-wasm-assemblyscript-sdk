@@ -1,5 +1,5 @@
-import { Bytes } from "../../assembly/database";
-import { GetDataByRID, GetDB, Log, SendTx, SetDB } from "../../assembly/sdk";
+import { Bytes } from "@w3bstream/wasm-sdk/assembly/database";
+import { GetDataByRID, GetDB, Log, SendTx, SetDB } from "@w3bstream/wasm-sdk";
 export { alloc } from "@w3bstream/wasm-sdk";
 
 export function start(rid: i32): i32 {
