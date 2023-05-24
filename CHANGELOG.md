@@ -1,3 +1,10 @@
+## [0.6.6](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.6.5...v0.6.6) (2023-05-24)
+
+
+### Bug Fixes
+
+* **sql:** update sql example ([c39a2ae](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/c39a2ae3b66170fbb7db84d280c322827cdea246))
+
 ## [0.6.5](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.6.4...v0.6.5) (2023-05-24)
 
 
