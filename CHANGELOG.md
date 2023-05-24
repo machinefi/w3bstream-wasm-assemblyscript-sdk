@@ -1,3 +1,10 @@
+## [0.6.5](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.6.4...v0.6.5) (2023-05-24)
+
+
+### Bug Fixes
+
+* **version:** update version ([d3c648e](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/d3c648e508f3376785176100ce2deba7d50cfeff))
+
 ## [0.6.4](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.6.3...v0.6.4) (2023-05-24)
 
 
