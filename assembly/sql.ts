@@ -120,10 +120,42 @@ class Bytes extends SQLTypes {
     encoder.setString("bytes", this.Bytes);
     return 0;
   }
-  constructor(value: string) {
+  constructor(value: Uint8Array) {
     super();
-    this.Bytes = value;
+    this.Bytes = bytesToBase64(value);
   }
+}
+
+
+function bytesToBase64(bytes: Uint8Array): string {
+  const base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  let result = "";
+  for (let i = 0; i < bytes.length; i += 3) {
+    // Get three bytes from input
+    const byte1 = bytes[i];
+    const byte2 = i + 1 < bytes.length ? bytes[i + 1] : 0;
+    const byte3 = i + 2 < bytes.length ? bytes[i + 2] : 0;
+
+    // Combine three bytes into a 24-bit integer
+    const threeBytes = (byte1 << 16) | (byte2 << 8) | byte3;
+
+    // Split 24-bit integer into four 6-bit integers
+    const char1 = (threeBytes >> 18) & 0x3f;
+    const char2 = (threeBytes >> 12) & 0x3f;
+    const char3 = (threeBytes >> 6) & 0x3f;
+    const char4 = threeBytes & 0x3f;
+
+    // Convert 6-bit integers to corresponding Base64 characters
+    const base64Char1 = base64Chars.charAt(char1);
+    const base64Char2 = base64Chars.charAt(char2);
+    const base64Char3 = i + 1 < bytes.length ? base64Chars.charAt(char3) : "=";
+    const base64Char4 = i + 2 < bytes.length ? base64Chars.charAt(char4) : "=";
+
+    // Append Base64 characters to result
+    result += base64Char1 + base64Char2 + base64Char3 + base64Char4;
+  }
+
+  return result;
 }
 
 export { Int32, Int64, Float32, Float64, String, Time, Bool, Bytes, SQLTypes };

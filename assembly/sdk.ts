@@ -1,4 +1,5 @@
 import { JSON, JSONEncoder } from ".";
+import { BaseDBValue } from "./database";
 import {  Bytes, SQLTypes } from "./sql";
 // @ts-ignore: decorator
 @external("env", "abort")
@@ -166,18 +167,18 @@ export function Log(message: string): i32 {
   return 0;
 }
 
-export function SetDB(key: string, value: i32): i32 {
+export function SetDB(key: string, value: ArrayBuffer): i32 {
   let keyEncoded = String.UTF8.encode(key, false);
   let key_ptr = changetype<usize>(keyEncoded);
   let key_size = keyEncoded.byteLength;
-  let valueEncoded = String.UTF8.encode(value.toString(), false);
+  let valueEncoded = value;
   let value_ptr = changetype<usize>(valueEncoded);
   let value_size = valueEncoded.byteLength;
   ws_set_db(key_ptr, key_size, value_ptr, value_size);
   return 0;
 }
 
-export function GetDB(key: string): string | null {
+export function GetDB(key: string): ArrayBuffer | null {
   //key to ptr
   let keyEncoded = String.UTF8.encode(key, false);
   let key_ptr = changetype<usize>(keyEncoded);
@@ -193,10 +194,16 @@ export function GetDB(key: string): string | null {
   }
   let rAddrValue = load<u32>(rAddr);
   let rAddrSize = load<u32>(rSize);
-  let data = String.UTF8.decodeUnsafe(rAddrValue, rAddrSize, true);
+  //rAddrValue is byte,return ArrayBuffer
+  let data = new ArrayBuffer(rAddrSize);
+  let dataView = new DataView(data);
+  for (let i = 0; i < (rAddrSize as i32); i++) {
+    dataView.setUint8(i, load<u8>(rAddrValue + i));
+  }
+  // Log("GetDB: " + key + " " + String.UTF8.decodeUnsafe(rAddrValue, rAddrSize, true))
   heap.free(rAddr);
   heap.free(rSize);
-  return data;
+  return dataView.buffer;
 }
 
 export function GetDataByRID(rid: i32): string {
