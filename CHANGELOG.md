@@ -1,3 +1,10 @@
+## [0.6.2](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.6.1...v0.6.2) (2023-05-24)
+
+
+### Bug Fixes
+
+* **kv:** support store bytes[] ([6a5750d](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/6a5750d6683c48ffcaae3fe4e5c6f9d7c01f975e))
+
 ## [0.6.1](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.6.0...v0.6.1) (2023-04-28)
 
 
