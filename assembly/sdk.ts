@@ -1,5 +1,4 @@
 import { JSON, JSONEncoder } from ".";
-import { BaseDBValue } from "./database";
 import {  Bytes, SQLTypes } from "./sql";
 // @ts-ignore: decorator
 @external("env", "abort")

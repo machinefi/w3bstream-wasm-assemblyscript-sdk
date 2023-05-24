@@ -110,6 +110,8 @@ class Bool extends SQLTypes {
   }
 }
 
+
+
 /**
  * Bytes is a base64 encoded string
  */
