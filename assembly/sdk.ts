@@ -34,6 +34,9 @@ import {  Bytes, SQLTypes } from "./sql";
   // @ts-ignore: decorator
   @external("env", "ws_call_contract")
   declare function ws_call_contract(chainID: i32, offset: usize, size: i32, vmAddrPtr: usize, vmSizePtr: usize): i32
+  // @ts-ignore: decorator
+  @external("stat", "ws_submit_metrics")
+  declare function ws_submit_metrics(ptr:usize,size:i32): i32
 
 export {
   JSON,
@@ -48,6 +51,17 @@ export function Abort(message: string, fileName: string, lineNumber: u32, column
   let fileName_ptr = changetype<usize>(fileNameEncoded);
   abort(message_ptr,fileName_ptr,lineNumber,columnNumber);
 }
+
+export function SubmitMetrics(data:string):i32 {
+  let dataEncoded = String.UTF8.encode(data, false);
+  let ptr = changetype<usize>(dataEncoded);
+  let size = dataEncoded.byteLength;
+  let code = ws_submit_metrics(ptr,size);
+  if (code !== 0) {
+    assert(false, "fail to submit metrics");
+  }
+  return 0
+} 
 
 export function QuerySQL(query:string,args:SQLTypes[] = []):string {
   let encoder = new JSONEncoder();
