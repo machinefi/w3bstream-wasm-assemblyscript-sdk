@@ -1,3 +1,5 @@
+import { u128 } from "as-bignum/assembly";
+import Big from "as-big";
 
 export function hexToInt(hexString: string): i32 {
   return parseInt(hexString, 16) as i32;
@@ -37,4 +39,29 @@ export function hexToBool(hexString: string): bool {
 
 export function hexToAddress(hexString: string): string {
   return hexString.slice(24);
+}
+
+export function ethToHex<T>(eth: T): string {
+  const weiStr = ethToWei(eth);
+  return weiToHex(weiStr);
+}
+
+export function ethToWei<T>(eth: T): string {
+  if (eth instanceof String && eth === "") {
+    throw new Error("Value is not a number");
+  }
+  const v = Big.of(eth).times(Big.of(10).pow(18));
+  return v.__stringify(false, true);
+}
+
+export function weiToHex(value: string): string {
+  return u128.from(value.toString()).toString(16);
+}
+
+export function buildTxSlot(valueHex: string): string {
+  return "0".repeat(64 - valueHex.length) + valueHex;
+}
+
+export function buildTxString(args: string[]): string {
+  return "0x" + args.join("");
 }
