@@ -49,6 +49,8 @@
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^9.0.2",
+    "as-big": "^0.2.2",
+    "as-bignum": "^0.2.40",
     "assemblyscript": "^0.26.7",
     "semantic-release": "^20.1.0"
   }
