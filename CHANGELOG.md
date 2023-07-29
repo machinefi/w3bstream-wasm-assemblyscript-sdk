@@ -1,3 +1,18 @@
+# [0.7.0](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.6.6...v0.7.0) (2023-07-29)
+
+
+### Bug Fixes
+
+* **erc20_mint:** update erc20 mint example ([de4bd4d](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/de4bd4d6b785f75c9655589d5ef924fd7361b616))
+* **README:** update readme ([7c07809](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/7c07809939b59a8b8607b8446f249af11d115d06))
+
+
+### Features
+
+* **api:** add submit mertrics api ([9cf74f7](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/9cf74f742c134ff749c0d9047cf0a8b05834798c))
+* **bignum:** add big number libraries ([a4cfd54](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/a4cfd540c89c5768964204cb46b6e4b7359b145f))
+* **tx-data-parsing:** add utils for tx data parsing ([2c58578](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/2c585780ea5ccdbaf39ce76b3a2b003366dbbc70))
+
 ## [0.6.6](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.6.5...v0.6.6) (2023-05-24)
 
 
