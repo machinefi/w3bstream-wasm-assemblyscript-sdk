@@ -9,6 +9,7 @@ The package requires node.js `>=16.0.0`
 npm install @w3bstream/wasm-sdk
 ```
 
+
 ## Useage
 
 **Your must export alloc function from @w3bstream/wasm-sdk for w3bstream vm**
