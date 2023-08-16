@@ -59,7 +59,7 @@ function buildTxData<T>(
   recipient: string,
   tokenAmount: T
 ): string {
-  const slotForRecipient = buildTxSlot(recipient.replace("0x", ""));
+  const slotForRecipient = buildTxSlot(recipient);
   const slotForAmount = tokenNumberToTxSlot(tokenAmount);
 
   return buildTxString([functionAddr, slotForRecipient, slotForAmount]);

@@ -59,7 +59,8 @@ export function weiToHex(value: string): string {
 }
 
 export function buildTxSlot(valueHex: string): string {
-  return "0".repeat(64 - valueHex.length) + valueHex;
+  const value = valueHex.replace("0x", "");
+  return "0".repeat(64 - value.length) + value;
 }
 
 export function buildTxString(args: string[]): string {
