@@ -1,3 +1,12 @@
+## [0.7.1](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.7.0...v0.7.1) (2023-08-25)
+
+
+### Bug Fixes
+
+* **dependencies:** update dependencies ([2e5e318](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/2e5e3183b7a640d1ddf713704d7a820decdf918c))
+* **git:** Removed and ignored .DS_Store ([be021b3](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/be021b32fd9cb0ab888fde74c1a7405bd9eabcf1))
+* **utils:** remove 0x from hex values ([81e5a0d](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/81e5a0ddf26145925cb9f7f0ccd45ae8afb2f211))
+
 # [0.7.0](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.6.6...v0.7.0) (2023-07-29)
 
 
