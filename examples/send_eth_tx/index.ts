@@ -1,6 +1,5 @@
-import { GetDataByRID, JSONEncoder, Log } from "@w3bstream/wasm-sdk";
+import { GetDataByRID, JSONEncoder, Log, ApiCall } from "@w3bstream/wasm-sdk";
 export { alloc } from "@w3bstream/wasm-sdk";
-import { ApiCall } from "../../assembly/sdk"
 import { encode, decode } from "as-base64/assembly/index";
 
 export function start(rid: i32): i32 {
