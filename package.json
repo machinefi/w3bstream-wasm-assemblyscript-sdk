@@ -28,6 +28,7 @@
     "asbuild:sql": "asc examples/sql/index.ts --target release -o ./build/sql.wasm",
     "asbuild:vm": "asc examples/vm/index.ts --target release -o ./build/vm.wasm",
     "asbuild:call_contract": "asc examples/call_contract/index.ts --target release -o ./build/call_contract.wasm",
+    "asbuild:send_eth_tx": "asc examples/send_eth_tx/index.ts --target release -o ./build/send_eth_tx.wasm",
     "asbuild:all": "npm run asbuild:abort & npm run asbuild:call_contract & npm run asbuild:log & npm run asbuild:json & npm run asbuild:kv & npm run asbuild:token_distribute & npm run asbuild:erc20_mint & npm run asbuild:click2earn & npm run asbuild:erc721_mint & npm run asbuild:env & npm run asbuild:sql & npm run asbuild:vm",
     "start": "npx serve ."
   },
@@ -35,10 +36,11 @@
   "license": "ISC",
   "dependencies": {
     "@w3bstream/wasm-sdk": "^0.7.0",
-    "assemblyscript": "^0.26.7",
-    "assemblyscript-json": "^1.1.0",
+    "as-base64": "^0.2.0",
     "as-big": "^0.2.2",
-    "as-bignum": "^0.2.40"
+    "as-bignum": "^0.2.40",
+    "assemblyscript": "^0.26.7",
+    "assemblyscript-json": "^1.1.0"
   },
   "type": "module",
   "exports": {

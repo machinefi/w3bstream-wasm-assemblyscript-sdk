@@ -1,42 +1,47 @@
 import { JSON, JSONEncoder } from ".";
-import {  Bytes, SQLTypes } from "./sql";
+import { Bytes, SQLTypes } from "./sql";
+
 // @ts-ignore: decorator
 @external("env", "abort")
-  declare function abort(message: usize ,fileName: usize ,lineNumber: u32,columnNumber: u32): void
+declare function abort(message: usize, fileName: usize, lineNumber: u32, columnNumber: u32): void
 // @ts-ignore: decorator
 @external("env", "ws_log")
-  declare function ws_log(logLevel: u8, ptr: usize, size: i32): i32
+declare function ws_log(logLevel: u8, ptr: usize, size: i32): i32
 // @ts-ignore: decorator
 @external("env", "ws_set_db")
-  declare function ws_set_db(key_ptr: usize, ket_size: i32, return_ptr: usize, return_size: i32): i32
+declare function ws_set_db(key_ptr: usize, ket_size: i32, return_ptr: usize, return_size: i32): i32
 // @ts-ignore: decorator
 @external("env", "ws_get_db")
-  declare function ws_get_db(addr: usize, size: i32, rAddr: usize, rSize: i32): i32
+declare function ws_get_db(addr: usize, size: i32, rAddr: usize, rSize: i32): i32
 // @ts-ignore: decorator
 @external("env", "ws_get_data")
-  declare function ws_get_data(rid: i32, data_ptr: usize, size_ptr: usize): i32
+declare function ws_get_data(rid: i32, data_ptr: usize, size_ptr: usize): i32
 // @ts-ignore: decorator
 @external("env", "ws_set_data")
-  declare function ws_set_data(rid: i32, ptr: usize, size: i32): i32
-  // @ts-ignore: decorator
-  @external("env", "ws_get_env")
-  declare function ws_get_env(kaddr: usize, ksize: i32, vaddr: usize, vsize: i32): i32
-  // @ts-ignore: decorator
-  @external("env", "ws_set_sql_db")
-  declare function ws_set_sql_db(ptr: usize, size: i32): i32
-  // @ts-ignore: decorator
-  @external("env", "ws_get_sql_db")
-  declare function ws_get_sql_db(ptr: usize, size: i32, rAddr: u32, rSize: u32): i32
-  // @ts-ignore: decorator
-  @external("env", "ws_send_tx")
-  // declare function ws_send_tx(ptr: usize, size: u32): i32
-  declare function ws_send_tx(chainID: i32, offset: usize, size: i32, vmAddrPtr: usize, vmSizePtr: usize): i32
-  // @ts-ignore: decorator
-  @external("env", "ws_call_contract")
-  declare function ws_call_contract(chainID: i32, offset: usize, size: i32, vmAddrPtr: usize, vmSizePtr: usize): i32
-  // @ts-ignore: decorator
-  @external("stat", "ws_submit_metrics")
-  declare function ws_submit_metrics(ptr:usize,size:i32): i32
+declare function ws_set_data(rid: i32, ptr: usize, size: i32): i32
+// @ts-ignore: decorator
+@external("env", "ws_get_env")
+declare function ws_get_env(kaddr: usize, ksize: i32, vaddr: usize, vsize: i32): i32
+// @ts-ignore: decorator
+@external("env", "ws_set_sql_db")
+declare function ws_set_sql_db(ptr: usize, size: i32): i32
+// @ts-ignore: decorator
+@external("env", "ws_get_sql_db")
+declare function ws_get_sql_db(ptr: usize, size: i32, rAddr: u32, rSize: u32): i32
+// @ts-ignore: decorator
+@external("env", "ws_send_tx")
+// declare function ws_send_tx(ptr: usize, size: u32): i32
+declare function ws_send_tx(chainID: i32, offset: usize, size: i32, vmAddrPtr: usize, vmSizePtr: usize): i32
+// @ts-ignore: decorator
+@external("env", "ws_call_contract")
+declare function ws_call_contract(chainID: i32, offset: usize, size: i32, vmAddrPtr: usize, vmSizePtr: usize): i32
+// @ts-ignore: decorator
+@external("stat", "ws_submit_metrics")
+declare function ws_submit_metrics(ptr: usize, size: i32): i32
+// @ts-ignore: decorator
+@external("env", "ws_api_call")
+declare function ws_api_call(ptr: usize, size: i32, rAddr: u32, rSize: u32): i32
+
 
 export {
   JSON,
@@ -49,26 +54,47 @@ export function Abort(message: string, fileName: string, lineNumber: u32, column
   let fileNameEncoded = String.UTF8.encode(fileName, false);
   let message_ptr = changetype<usize>(messageEncoded);
   let fileName_ptr = changetype<usize>(fileNameEncoded);
-  abort(message_ptr,fileName_ptr,lineNumber,columnNumber);
+  abort(message_ptr, fileName_ptr, lineNumber, columnNumber);
 }
 
-export function SubmitMetrics(data:string):i32 {
+export function ApiCall(request: string): string {
+  let httpRequestJSONStringEncoded = String.UTF8.encode(request, false);
+  let ptr = changetype<usize>(httpRequestJSONStringEncoded);
+  let size = httpRequestJSONStringEncoded.byteLength;
+  let rAddr: usize = heap.alloc(sizeof<u32>());
+  let rSize: usize = heap.alloc(sizeof<u32>());
+  let code = ws_api_call(ptr, size, rAddr as u32, rSize as u32);
+  if (code !== 0) {
+    assert(false, "fail to call api");
+  }
+  let rAddrValue = load<u32>(rAddr);
+  let rAddrSize = load<u32>(rSize);
+  let data = String.UTF8.decodeUnsafe(rAddrValue, rAddrSize, true);
+  heap.free(rAddr);
+  heap.free(rSize);
+  Log(data)
+  return data
+}
+
+
+
+export function SubmitMetrics(data: string): i32 {
   let dataEncoded = String.UTF8.encode(data, false);
   let ptr = changetype<usize>(dataEncoded);
   let size = dataEncoded.byteLength;
-  let code = ws_submit_metrics(ptr,size);
+  let code = ws_submit_metrics(ptr, size);
   if (code !== 0) {
     assert(false, "fail to submit metrics");
   }
   return 0
-} 
+}
 
-export function QuerySQL(query:string,args:SQLTypes[] = []):string {
+export function QuerySQL(query: string, args: SQLTypes[] = []): string {
   let encoder = new JSONEncoder();
   encoder.pushObject(null)
   encoder.setString("statement", query);
   encoder.pushArray("params");
-  if(args.length!=0){
+  if (args.length != 0) {
     for (let i = 0; i < args.length; i++) {
       const param: SQLTypes = args[i];
       encoder.pushObject(null)
@@ -82,12 +108,12 @@ export function QuerySQL(query:string,args:SQLTypes[] = []):string {
   let string = encoder.toString()
   Log(string)
 
-  let key_ptr = changetype<usize>(serializedQuery.buffer) ;
-  let rAddr:usize = heap.alloc(sizeof<u32>());
-  let rSize:usize = heap.alloc(sizeof<u32>());
+  let key_ptr = changetype<usize>(serializedQuery.buffer);
+  let rAddr: usize = heap.alloc(sizeof<u32>());
+  let rSize: usize = heap.alloc(sizeof<u32>());
 
   let code = ws_get_sql_db(key_ptr, serializedQuery.length, rAddr as u32, rSize as u32);
-  Log("code:"+code.toString())
+  Log("code:" + code.toString())
   if (code != 0) {
     assert(false, `QuerySQL failed`);
   }
@@ -202,8 +228,8 @@ export function GetDB(key: string): ArrayBuffer | null {
 
   let code = ws_get_db(key_ptr, key_size, rAddr, rSize);
   if (code != 0) {
-      return null
-      // assert(false, "GetDB failed");
+    return null
+    // assert(false, "GetDB failed");
   }
   let rAddrValue = load<u32>(rAddr);
   let rAddrSize = load<u32>(rSize);
@@ -236,12 +262,12 @@ export function GetDataByRID(rid: i32): string {
   return "";
 }
 
-export function SendTx(chainId: i32, to:string, value:string ,data:string): string {
+export function SendTx(chainId: i32, to: string, value: string, data: string): string {
   let tx = `
   {
       "to": "${to}",
       "value": "${value}",
-      "data": "${data.replace('0x','')}"
+      "data": "${data.replace('0x', '')}"
   }`
   Log(tx)
   let txEncoded = String.UTF8.encode(tx, false);
@@ -253,7 +279,7 @@ export function SendTx(chainId: i32, to:string, value:string ,data:string): stri
 
   const ret = ws_send_tx(chainId, tx_ptr, tx_size, vmAddrPtr, vmSizePtr);
 
-  if(ret!=0) {
+  if (ret != 0) {
     assert(false, "send tx failed");
   }
 
@@ -268,11 +294,11 @@ export function SendTx(chainId: i32, to:string, value:string ,data:string): stri
   return vm;
 }
 
-export function CallContract(chainId:i32,to:string,data:string):string {
+export function CallContract(chainId: i32, to: string, data: string): string {
   let tx = `
   {
       "to": "${to}",
-      "data": "${data.replace('0x','')}"
+      "data": "${data.replace('0x', '')}"
   }`
   let txEncoded = String.UTF8.encode(tx, false);
   let tx_ptr = changetype<usize>(txEncoded);
@@ -282,7 +308,7 @@ export function CallContract(chainId:i32,to:string,data:string):string {
   let vmSizePtr = heap.alloc(sizeof<u32>());
 
   const ret = ws_call_contract(chainId, tx_ptr, tx_size, vmAddrPtr, vmSizePtr);
-  if(ret!=0) {
+  if (ret != 0) {
     assert(false, "send tx failed");
   }
 
