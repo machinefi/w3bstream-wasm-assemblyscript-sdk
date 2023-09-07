@@ -1,3 +1,10 @@
+# [0.9.0](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.8.0...v0.9.0) (2023-09-07)
+
+
+### Features
+
+* **examples:** add examples ([722f7ac](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/722f7acbb41b9e544eac4410bea68701a7927110))
+
 # [0.8.0](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.7.1...v0.8.0) (2023-09-01)
 
 
