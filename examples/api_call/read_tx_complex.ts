@@ -1,8 +1,7 @@
-import { GetDataByRID, JSON, JSONEncoder, Log, } from "@w3bstream/wasm-sdk";
+import { GetDataByRID, JSON, JSONEncoder, Log, ApiCall } from "@w3bstream/wasm-sdk";
 export { alloc } from "@w3bstream/wasm-sdk";
 import { encode, decode } from "as-base64/assembly/index";
-import { ApiCall } from "../../assembly"
-import { utf8ArrayToString } from "../../assembly/utility"
+import { utf8ArrayToString } from "@w3bstream/wasm-sdk/assembly/utility"
 
 export function start(rid: i32): i32 {
   const message = GetDataByRID(rid);
