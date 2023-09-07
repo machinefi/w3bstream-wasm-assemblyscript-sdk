@@ -66,3 +66,32 @@ export function buildTxSlot(valueHex: string): string {
 export function buildTxString(args: string[]): string {
   return "0x" + args.join("");
 }
+
+export function utf8ArrayToString(array: Uint8Array): string {
+  let result = "";
+  let i = 0;
+  while (i < array.length) {
+    const byte = array[i++];
+    if (byte < 0x80) {
+      result += String.fromCharCode(byte);
+    } else if (byte < 0xE0) {
+      const byte2 = array[i++] & 0x3F;
+      result += String.fromCharCode(((byte & 0x1F) << 6) | byte2);
+    } else if (byte < 0xF0) {
+      const byte2 = array[i++] & 0x3F;
+      const byte3 = array[i++] & 0x3F;
+      result += String.fromCharCode(((byte & 0x0F) << 12) | (byte2 << 6) | byte3);
+    } else {
+      const byte2 = array[i++] & 0x3F;
+      const byte3 = array[i++] & 0x3F;
+      const byte4 = array[i++] & 0x3F;
+      const codepoint =
+        ((byte & 0x07) << 18) | (byte2 << 12) | (byte3 << 6) | byte4;
+      result += String.fromCharCode(
+        0xD800 + (codepoint >> 10),
+        0xDC00 + (codepoint & 0x3FF)
+      );
+    }
+  }
+  return result;
+}
