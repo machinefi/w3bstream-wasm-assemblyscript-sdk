@@ -7,7 +7,7 @@ export function start(rid: i32): i32 {
   const message = GetDataByRID(rid);
   let bodyEncode = new JSONEncoder();
   bodyEncode.pushObject("");
-  bodyEncode.setInteger('chainID', 4690);
+  bodyEncode.setString('chainName', "iotex-testnet");
   bodyEncode.setString('hash', 'fcaf377ff3cc785d60c58de7e121d6a2e79e1c58c189ea8641f3ea61f7605285');
   bodyEncode.popObject();
 
