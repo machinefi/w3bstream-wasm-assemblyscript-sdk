@@ -9,11 +9,10 @@ export function start(rid: i32): i32 {
   bodyEncode.pushObject("");
   bodyEncode.setString('chainName', "iotex-testnet");
   bodyEncode.setString('operatorName', 'default');
-  bodyEncode.setString('to', '0x659A60915F5f758A7886Fd2074f31B17Aa418B4c');
-  bodyEncode.setString('value', '0');
-  //Approve erc20 
-  //need to send Operator Address gas fee
-  bodyEncode.setString('data', `0x095ea7b3000000000000000000000000610cbda6f0037b4141a5b949f56479106becb1e900000000000000000000000000000000000000000000000000000000000186a0`);
+  bodyEncode.setString('to', '0x9117f5EF4156709092f79740a97b1638cA399A00');
+  bodyEncode.setString('value', '10000000000000000000');
+  //send native token to 0x9117f5EF4156709092f79740a97b1638cA399A00
+  bodyEncode.setString('data', `0x`);
 
   bodyEncode.popObject();
 

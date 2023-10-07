@@ -14,7 +14,7 @@ export function start(rid: i32): i32 {
   let encoder = new JSONEncoder();
   encoder.pushObject("");
   encoder.setString('Method', 'GET');
-  encoder.setString('Url', 'w3bstream://w3bstream.com/system/read_tx');
+  encoder.setString('Url', '/system/read_tx');
   encoder.pushObject("Header");
   encoder.pushArray("Eventtype");
   encoder.setString("", "result");

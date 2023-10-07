@@ -57,23 +57,36 @@ export function Abort(message: string, fileName: string, lineNumber: u32, column
   abort(message_ptr, fileName_ptr, lineNumber, columnNumber);
 }
 
-export function ApiCall(request: string): string {
-  let httpRequestJSONStringEncoded = String.UTF8.encode(request, false);
-  let ptr = changetype<usize>(httpRequestJSONStringEncoded);
-  let size = httpRequestJSONStringEncoded.byteLength;
-  let rAddr: usize = heap.alloc(sizeof<u32>());
-  let rSize: usize = heap.alloc(sizeof<u32>());
-  let code = ws_api_call(ptr, size, rAddr as u32, rSize as u32);
-  if (code !== 0) {
-    assert(false, "fail to call api");
+export function ApiCall(request_str: string): string {
+  let requestJSONObj: JSON.Obj = JSON.parse(request_str) as JSON.Obj;
+  let urlOrNull: JSON.Str | null = requestJSONObj.getString("Url");
+  if (urlOrNull) {
+    Log("url:" + urlOrNull.toString())
+    if (!urlOrNull.toString().startsWith("w3bstream://w3bstream.com/")) {
+      requestJSONObj.set("Url", "w3bstream://w3bstream.com" + urlOrNull.toString());
+    }
+    let request = requestJSONObj.toString();
+    Log(request)
+    let httpRequestJSONStringEncoded = String.UTF8.encode(request, false);
+    let ptr = changetype<usize>(httpRequestJSONStringEncoded);
+    let size = httpRequestJSONStringEncoded.byteLength;
+    let rAddr: usize = heap.alloc(sizeof<u32>());
+    let rSize: usize = heap.alloc(sizeof<u32>());
+    let code = ws_api_call(ptr, size, rAddr as u32, rSize as u32);
+    if (code !== 0) {
+      assert(false, "fail to call api");
+    }
+    let rAddrValue = load<u32>(rAddr);
+    let rAddrSize = load<u32>(rSize);
+    let data = String.UTF8.decodeUnsafe(rAddrValue, rAddrSize, true);
+    heap.free(rAddr);
+    heap.free(rSize);
+    Log(data)
+    return data
+  } else {
+    assert(false, "Url is required");
+    return ''
   }
-  let rAddrValue = load<u32>(rAddr);
-  let rAddrSize = load<u32>(rSize);
-  let data = String.UTF8.decodeUnsafe(rAddrValue, rAddrSize, true);
-  heap.free(rAddr);
-  heap.free(rSize);
-  Log(data)
-  return data
 }
 
 

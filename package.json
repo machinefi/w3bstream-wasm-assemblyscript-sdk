@@ -1,6 +1,6 @@
 {
   "name": "@w3bstream/wasm-sdk",
-  "version": "0.9.0",
+  "version": "0.1.2",
   "description": "",
   "main": "index.js",
   "engines": {
@@ -29,6 +29,7 @@
     "asbuild:vm": "asc examples/vm/index.ts --target release -o ./build/vm.wasm",
     "asbuild:call_contract": "asc examples/call_contract/index.ts --target release -o ./build/call_contract.wasm",
     "asbuild:send_eth_tx": "asc examples/api_call/send_tx_complex.ts --target release -o ./build/send_eth_tx.wasm",
+    "asbuild:read_tx": "asc examples/api_call/read_tx_complex.ts --target release -o ./build/read_tx_complex.wasm",
     "asbuild:all": "npm run asbuild:abort & npm run asbuild:call_contract & npm run asbuild:log & npm run asbuild:json & npm run asbuild:kv & npm run asbuild:token_distribute & npm run asbuild:erc20_mint & npm run asbuild:click2earn & npm run asbuild:erc721_mint & npm run asbuild:env & npm run asbuild:sql & npm run asbuild:vm",
     "start": "npx serve ."
   },
