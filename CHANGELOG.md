@@ -1,3 +1,10 @@
+# [0.10.0](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.9.0...v0.10.0) (2023-10-07)
+
+
+### Features
+
+* **sdk:** remove api call protocol ([1e3e7bc](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/1e3e7bcf1284a0fd156598724e20daa4f985348f))
+
 # [0.9.0](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.8.0...v0.9.0) (2023-09-07)
 
 
