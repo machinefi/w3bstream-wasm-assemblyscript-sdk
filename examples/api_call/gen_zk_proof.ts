@@ -1,5 +1,4 @@
-import { Log, GetDataByRID, } from "@w3bstream/wasm-sdk";
-import { HTTP } from "@w3bstream/wasm-sdk/assembly";
+import { Log, GetDataByRID, HTTP } from "@w3bstream/wasm-sdk";
 export { alloc } from "@w3bstream/wasm-sdk";
 export function start(rid: i32): i32 {
   HTTP.genZkProof(

@@ -37,7 +37,7 @@
   "author": "@w3bstream",
   "license": "ISC",
   "dependencies": {
-    "@w3bstream/wasm-sdk": "^0.11.0",
+    "@w3bstream/wasm-sdk": "^0.12.0",
     "as-base64": "^0.2.0",
     "as-big": "^0.2.2",
     "as-bignum": "^0.2.40",
