@@ -1,5 +1,6 @@
 export * from "./assembly/sdk";
 export * from "./assembly/memory";
+export * from "./assembly/api"
 export function abort(
   message: string | null,
   fileName: string | null,
