@@ -1,3 +1,10 @@
+# [0.11.0](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.10.0...v0.11.0) (2023-10-17)
+
+
+### Features
+
+* **api:** add http api ([2048135](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/commit/204813589cc70a3e454e8acb9a6b5fbc0c52aef6))
+
 # [0.10.0](https://github.com/machinefi/w3bstream-wasm-assemblyscript-sdk/compare/v0.9.0...v0.10.0) (2023-10-07)
 
 
