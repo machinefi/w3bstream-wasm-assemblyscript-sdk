@@ -177,6 +177,9 @@ export function start(rid: i32): i32 {
 }
 ```
 
+## Api call document
+> https://github.com/machinefi/w3bstream-wasm-golang-sdk/blob/main/api.md#send-zero-knowledge-proof
+
 ## Build
 
 > https://www.assemblyscript.org/concepts.html#special-imports
