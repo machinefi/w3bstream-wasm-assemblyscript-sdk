@@ -14,65 +14,6 @@ npm install @w3bstream/wasm-sdk
 
 **Your must export alloc function from @w3bstream/wasm-sdk for w3bstream vm**
 
-### Log
-
-> Log(message: string)
-
-```typescript
-import { Log } from "@w3bstream/wasm-sdk";
-//export alloc for w3bstream vm
-export { alloc } from "@w3bstream/wasm-sdk";
-
-export function start(rid: i32): i32 {
-  Log("Start from assemblyscript");
-  const message = GetDataByRID(rid);
-  Log("wasm received message:" + message);
-  return 0;
-}
-```
-
-### SendTx
-
-> SendTx(chainId:i32, tx: string) : string
-
-```typescript
-import { SendTx } from "@w3bstream/wasm-sdk";
-export { alloc } from "@w3bstream/wasm-sdk";
-
-export function start(rid: i32): i32 {
-  const ERC20Addr = `0xb73eE6EB5b1984c78CCcC49eA7Ad773E71d74F51`;
-  const account = `9117f5EF4156709092f79740a97b1638cA399A00`;
-  const hash = SendTx(
-    4690,
-    `
-  {
-      "to": "${ERC20Addr}",
-      "value": "0",
-      "data": "40c10f19000000000000000000000000${account}0000000000000000000000000000000000000000000000000de0b6b3a7640000"
-  }`
-  );
-  Log("wasm send tx:" + hash);
-  return 0;
-}
-```
-
-### GetDB & SetDB
-
-> SetDB(key: string, value: i32)
-
-> GetDB(key: string)
-
-```typescript
-import { SetDB, Log, GetDB } from "@w3bstream/wasm-sdk";
-export { alloc } from "@w3bstream/wasm-sdk";
-
-export function start(rid: i32): i32 {
-  SetDB("wordCount", word.length);
-  let value = GetDB("wordCount");
-  Log("wasm get value:" + value.toString());
-  return 0;
-}
-```
 
 ### ExecSQL & QuerySQL
 
@@ -179,6 +120,104 @@ export function start(rid: i32): i32 {
 
 ## Api call document
 > https://github.com/machinefi/w3bstream-wasm-golang-sdk/blob/main/api.md#send-zero-knowledge-proof
+
+## Log
+
+> Log(message: string)
+
+```typescript
+import { Log } from "@w3bstream/wasm-sdk";
+//export alloc for w3bstream vm
+export { alloc } from "@w3bstream/wasm-sdk";
+
+export function start(rid: i32): i32 {
+  Log("Start from assemblyscript");
+  const message = GetDataByRID(rid);
+  Log("wasm received message:" + message);
+  return 0;
+}
+```
+
+## GenZkProof
+> genZkProof(imageID: string, privateInput: string, publicInput: string, receiptType: string, eventType: string = "result") : string
+```typescript
+import { Log, GetDataByRID, HTTP } from "@w3bstream/wasm-sdk";
+export { alloc } from "@w3bstream/wasm-sdk";
+export function start(rid: i32): i32 {
+  HTTP.genZkProof(
+    "3145991386, 3471678490, 3632776032, 2595288688, 1478438623, 4259749138, 987879707, 1456846509",
+    "16",
+    "4,30",
+    "Stark",
+    'handle_result'
+  )
+  return 0;
+}
+
+export function handle_result(rid: i32): i32 {
+  const message = GetDataByRID(rid);
+  Log(HTTP.parseResult(message))
+  return 0;
+}
+```
+
+## ReadTx
+> ReadTx(chainName: string, hash: string, eventType: string = "result") : string
+
+```typescript
+import { Log, GetDataByRID, HTTP } from "@w3bstream/wasm-sdk";
+export { alloc } from "@w3bstream/wasm-sdk";
+export function start(rid: i32): i32 {
+  HTTP.readTx("iotex-testnet", "fcaf377ff3cc785d60c58de7e121d6a2e79e1c58c189ea8641f3ea61f7605285")
+  return 0;
+}
+
+export function handle_result(rid: i32): i32 {
+  const message = GetDataByRID(rid);
+  Log(HTTP.parseResult(message))
+  return 0;
+}
+```
+
+
+
+## SendTx
+
+> SendTx(chainId:i32, tx: string) : string
+
+```typescript
+import { Log, GetDataByRID, HTTP } from "@w3bstream/wasm-sdk";
+export { alloc } from "@w3bstream/wasm-sdk";
+export function start(rid: i32): i32 {
+  HTTP.sendTx("iotex-testnet", "default", "0x9117f5EF4156709092f79740a97b1638cA399A00", "10000000000000000000", "0x")
+  return 0;
+}
+
+export function handle_result(rid: i32): i32 {
+  const message = GetDataByRID(rid);
+  Log(HTTP.parseResult(message))
+  return 0;
+}
+```
+
+## GetDB & SetDB
+
+> SetDB(key: string, value: i32)
+
+> GetDB(key: string)
+
+```typescript
+import { SetDB, Log, GetDB } from "@w3bstream/wasm-sdk";
+export { alloc } from "@w3bstream/wasm-sdk";
+
+export function start(rid: i32): i32 {
+  SetDB("wordCount", word.length);
+  let value = GetDB("wordCount");
+  Log("wasm get value:" + value.toString());
+  return 0;
+}
+```
+
 
 ## Build
 
